@@ -1,0 +1,95 @@
+
+.select-city-wrap.data-v-24bee0ba {
+	overflow: hidden;
+}
+
+/* 滑块 */
+.scroll.data-v-24bee0ba {
+	/* background-color: yellow; */
+}
+.name.data-v-24bee0ba {
+	color: #333;
+	font-size: 28rpx;
+	margin: 30rpx 30rpx;
+}
+
+/* 城市 */
+.letter.data-v-24bee0ba {
+	width: 44rpx;
+	margin-top: 40rpx;
+	margin-bottom: 30rpx;
+	margin-left: 30rpx;
+	color: #000;
+	border-radius: 22rpx;
+	font-size: 32rpx;
+	font-weight: bold;
+	text-align: center;
+}
+.city-item.data-v-24bee0ba {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	margin-left: 20rpx;
+}
+.city-item-view.data-v-24bee0ba {
+	width: 180rpx;
+	height: 65rpx;
+	margin: 15rpx;
+	/* border: 1rpx solid #dcdcdc;
+	border-radius: 6rpx; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #f9f9f9;
+}
+.city-item-viewa.data-v-24bee0ba {
+	width: 180rpx;
+	height: 55rpx;
+	margin: 15rpx;
+	border: 1rpx solid #2f9bfe;
+	border-radius: 6rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #d5ebff;
+}
+.city-item-text.data-v-24bee0ba {
+	color: #000;
+	font-size: 26rpx;
+}
+.city-item-texta.data-v-24bee0ba {
+	font-size: 28rpx;
+	color: #2f9bfe;
+}
+
+/* 右锚点 */
+.anchor.data-v-24bee0ba {
+	/* background-color: pink; */
+	position: fixed;
+	right: 20rpx;
+	top: 20rpx;
+	z-index: 10;
+	flex-direction: row;
+}
+.anchor-item.data-v-24bee0ba {
+	height: 40rpx;
+	align-items: center;
+	flex-direction: row;
+	text-align: center;
+}
+.anchor-text-position.data-v-24bee0ba {
+	height: 40rpx;
+	width: 40rpx;
+	text-align: center;
+	line-height: 40rpx;
+	font-size: 32rpx;
+	color: #333;
+	background-color: #E5E5E5;
+	border-radius: 20rpx;
+}
+.anchor-text.data-v-24bee0ba {
+	font-size: 26rpx;
+	padding: 0 15rpx;
+	color: #85DBD0;
+}
+

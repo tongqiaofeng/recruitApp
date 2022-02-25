@@ -1,0 +1,1 @@
+<view><lh-select-city vue-id="0f144bc0-1" value="{{value}}" windowHeight="{{windowHeight}}" hotCitys="{{hotCitys}}" data-event-opts="{{[['^onSelect',[['cityClick']]]]}}" bind:onSelect="__e" bind:__l="__l"></lh-select-city></view>

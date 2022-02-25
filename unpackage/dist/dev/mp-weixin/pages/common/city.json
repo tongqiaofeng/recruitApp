@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "选择城市",
+  "navigationBarBackgroundColor": "#fff",
+  "usingComponents": {
+    "lh-select-city": "/js_sdk/lh-select-city/index"
+  }
+}

@@ -1,0 +1,271 @@
+<template>
+	<view class="select-city-wrap" :style="'height:'+windowHeight">
+		<!-- 内容 -->
+		<scroll-view class="scroll" :scroll-into-view="scrollIntoId" :scroll-y="true" :scroll-with-animation="true"
+			:show-scrollbar="false" :style="'height:'+windowHeight">
+			<!-- 当前城市 -->
+			<view style="height:200rpx">
+				<text class="name" id="current">当前城市</text>
+				<view class="city-item" v-if="city">
+					<view class="city-item-view">
+						<text class="city-item-text">{{ city }}</text>
+					</view>
+				</view>
+			</view>
+
+			<!-- 热门城市 -->
+			<text class="name">热门城市</text>
+			<view class="city-item">
+				<view :class=" city== cityname?'city-item-viewa':'city-item-view' " v-for="(cityname, i) in hotCitys"
+					:key="cityname" @click="onSelect(cityname)">
+					<text :class=" city== cityname?'city-item-texta':'city-item-text' ">{{ cityname }}</text>
+				</view>
+			</view>
+			<view :id="item.letter" v-for="item in cityData" :key="item.letter">
+				<!-- ABCD -->
+				<view class="letter">{{ item.letter }}</view>
+				<!-- 城市 -->
+				<view class="city-item">
+					<view :class=" city== cityname?'city-item-viewa':'city-item-view' "
+						v-for="(cityname, i) in item.list" :key="cityname" @click="onSelect(cityname)">
+						<text :class=" city== cityname?'city-item-texta':'city-item-text' ">{{ cityname }}</text>
+					</view>
+				</view>
+			</view>
+		</scroll-view>
+
+		<!-- 右边锚点 -->
+		<view class="anchor" @touchstart="start" @touchmove="move" @touchend="end" v-if="sliding">
+			<!-- <view>
+				<view class="anchor-item"><text v-if=" slidingChoice == 'current' " class="anchor-text">#</text></view>
+				<view class="anchor-item" v-for="(item,index) in anchorArr" :key="item">
+					<text class="anchor-text-position" v-if=" slidingChoice==item ">{{item}}</text>
+				</view>
+			</view> -->
+			<view>
+				<view class="anchor-item" @click="scrollIntoId='current' "><text class="anchor-text">#</text></view>
+				<view class="anchor-item" v-for="(item,index) in anchorArr" :key="item" @click="scrollIntoId=item">
+					<text class="anchor-text">{{item}}</text>
+				</view>
+			</view>
+		</view>
+		<view class="anchor" v-else>
+			<view>
+				<view class="anchor-item" @click="scrollIntoId='current' "><text class="anchor-text">#</text></view>
+				<view class="anchor-item" v-for="(item,index) in anchorArr" :key="item" @click="scrollIntoId=item">
+					<text class="anchor-text">{{item}}</text>
+				</view>
+			</view>
+		</view>
+
+
+	</view>
+</template>
+<script>
+	// hotCitys  热门城市  
+	// value 当前选中城市
+	// windowHeight  scroll的高 也是滑块的高 记得带单位!!! px rpx upx都支持
+	// sliding 是否开始滑动选择 默认开启  false true
+	// @onSelect   点击切换城市事件 参数为城市名称
+	import cityData from './cityData.js'
+	let anchorArr = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "W", "X",
+		"Y", "Z"
+	];
+	export default {
+		props: {
+			hotCitys: {
+				type: Array,
+				default () {
+					return []
+				}
+			},
+			value: {
+				type: String
+			},
+			windowHeight: {
+				type: String
+			},
+			// 开启滑动选择
+			sliding: {
+				type: Boolean,
+				default: true
+			},
+		},
+		data() {
+			return {
+				cityData,
+				scrollIntoId: '',
+				city: "",
+				anchorArr,
+				// 滑动中选中的具体值
+				slidingChoice: "",
+				//开始滑动位置
+				startY: "",
+				// 滑动中当前选中下标
+				downIndex: -1,
+			}
+		},
+		computed: {},
+		created() {},
+		mounted() {
+			this.city = this.value;
+		},
+		methods: {
+			// 点击城市
+			onSelect(city) {
+				console.log('点击选择城市');
+				console.log(city);
+				this.city = city;
+				this.$emit('onSelect', city);
+			},
+			// 开始滑动
+			start(e) {
+				// console.log("开始滑动",e);
+				// #ifdef MP
+				let eY = e.changedTouches[0].clientY
+				// #endif
+				// #ifdef APP-PLUS
+				let eY = e.changedTouches[0].screenY
+				// #endif
+				this.startY = eY;
+				// 计算点击时候下标
+				let index = eY / (uni.upx2px(eY) / eY);
+				index = parseInt((index - 200) / 40) - 1;
+				this.downIndex = index;
+			},
+			// 开始移动
+			move(e) {
+				// console.log("开始移动",e);
+				// #ifdef MP
+				let downY = e.changedTouches[0].clientY;
+				// #endif
+				// #ifdef APP-PLUS
+				let downY = e.changedTouches[0].screenY;
+				// #endif
+
+				let gap = this.startY - downY;
+				let index = parseInt(gap / (uni.upx2px(gap) / gap) / 40);
+				// 选中下标
+				let optforIndex = this.downIndex - index;
+				if (optforIndex < -1) {
+					optforIndex = -1;
+				} else if (optforIndex > 21) {
+					optforIndex = 21;
+				}
+				this.slidingChoice = this.anchorArr[optforIndex];
+				this.scrollIntoId = this.anchorArr[optforIndex];
+			},
+			// 滑动结束
+			end(e) {
+				// console.log("结束滑动",e)
+				this.slidingChoice = '';
+			},
+
+		}
+	}
+</script>
+
+<style scoped>
+	.select-city-wrap {
+		overflow: hidden;
+	}
+
+	/* 滑块 */
+	.scroll {
+		/* background-color: yellow; */
+	}
+
+	.name {
+		color: #333;
+		font-size: 28rpx;
+		margin: 30rpx 30rpx;
+	}
+
+	/* 城市 */
+	.letter {
+		width: 44rpx;
+		margin-top: 40rpx;
+		margin-bottom: 30rpx;
+		margin-left: 30rpx;
+		color: #000;
+		border-radius: 22rpx;
+		font-size: 32rpx;
+		font-weight: bold;
+		text-align: center;
+	}
+
+	.city-item {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		margin-left: 20rpx;
+	}
+
+	.city-item-view {
+		width: 180rpx;
+		height: 65rpx;
+		margin: 15rpx;
+		/* border: 1rpx solid #dcdcdc;
+		border-radius: 6rpx; */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #f9f9f9;
+	}
+
+	.city-item-viewa {
+		width: 180rpx;
+		height: 55rpx;
+		margin: 15rpx;
+		border: 1rpx solid #2f9bfe;
+		border-radius: 6rpx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #d5ebff;
+	}
+
+	.city-item-text {
+		color: #000;
+		font-size: 26rpx;
+	}
+
+	.city-item-texta {
+		font-size: 28rpx;
+		color: #2f9bfe;
+	}
+
+	/* 右锚点 */
+	.anchor {
+		/* background-color: pink; */
+		position: fixed;
+		right: 20rpx;
+		top: 20rpx;
+		z-index: 10;
+		flex-direction: row;
+	}
+
+	.anchor-item {
+		height: 40rpx;
+		align-items: center;
+		flex-direction: row;
+		text-align: center;
+	}
+
+	.anchor-text-position {
+		height: 40rpx;
+		width: 40rpx;
+		text-align: center;
+		line-height: 40rpx;
+		font-size: 32rpx;
+		color: #333;
+		background-color: #E5E5E5;
+		border-radius: 20rpx;
+	}
+
+	.anchor-text {
+		font-size: 26rpx;
+		padding: 0 15rpx;
+		color: #85DBD0;
+	}
+</style>

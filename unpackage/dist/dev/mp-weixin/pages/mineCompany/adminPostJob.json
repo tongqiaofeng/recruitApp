@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "职位管理",
+  "navigationBarBackgroundColor": "#fff",
+  "enablePullDownRefresh": true,
+  "usingComponents": {}
+}

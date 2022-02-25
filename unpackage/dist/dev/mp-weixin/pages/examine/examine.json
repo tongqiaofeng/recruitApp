@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "u-subsection": "/uni_modules/uview-ui/components/u-subsection/u-subsection",
+    "u-popup": "/uni_modules/uview-ui/components/u-popup/u-popup"
+  }
+}
