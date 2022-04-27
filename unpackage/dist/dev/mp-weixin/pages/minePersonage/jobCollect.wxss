@@ -107,7 +107,6 @@
 }
 .commodity .del-popup-container.data-v-940bb384 {
   width: 580rpx;
-  height: 307rpx;
   margin: 0 auto;
   padding: 40rpx;
   background-color: #fff;
@@ -117,5 +116,24 @@
 .commodity .del-popup-container .popup-title.data-v-940bb384 {
   font-size: 38rpx;
   font-weight: bold;
+}
+.commodity .del-popup-container .popup-main.data-v-940bb384 {
+  margin-top: 40rpx;
+  color: #A9A5A0;
+  font-size: 24rpx;
+}
+.commodity .del-popup-container .popup-button.data-v-940bb384 {
+  margin-top: 80rpx;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.commodity .del-popup-container .popup-button .cancle.data-v-940bb384 {
+  color: #A9A5A0;
+}
+.commodity .del-popup-container .popup-button .sure.data-v-940bb384 {
+  margin-left: 80rpx;
+  color: #85dbd0;
 }
 

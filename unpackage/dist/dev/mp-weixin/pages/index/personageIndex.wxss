@@ -26,7 +26,50 @@
 /* 文章场景相关 */
 .person-index-container.data-v-0104d1be {
   min-height: 100vh;
-  background-color: #f1f1f1;
+  background-color: #f3f7fa;
+}
+.person-index-container .top-search.data-v-0104d1be {
+  padding: 125rpx 30rpx 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, #5EB7F5, #5EDAF5);
+}
+.person-index-container .top-search .search-left.data-v-0104d1be {
+  height: 75rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 31rpx;
+  margin-right: 29rpx;
+  background-color: #fff;
+  border-radius: 18.75px;
+  flex: 1;
+  box-shadow: 0 12rpx 12rpx -4rpx rgba(94, 183, 245, 0.11);
+}
+.person-index-container .top-search .search-left .left-img.data-v-0104d1be {
+  margin-right: 20rpx;
+}
+.person-index-container .top-search .search-left .left-img image.data-v-0104d1be {
+  width: 24rpx;
+  height: 24rpx;
+}
+.person-index-container .top-search .search-left .left-input.data-v-0104d1be {
+  font-size: 24rpx;
+  color: #ADBBD1;
+}
+.person-index-container .top-search .search-right.data-v-0104d1be {
+  width: 75rpx;
+  height: 75rpx;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12rpx 12rpx -4rpx rgba(94, 183, 245, 0.11);
+}
+.person-index-container .top-search .search-right image.data-v-0104d1be {
+  width: 27rpx;
+  height: 30rpx;
 }
 .person-index-container .index-top.data-v-0104d1be {
   padding: 20rpx 52rpx;
@@ -51,18 +94,24 @@
   font-size: 28rpx;
 }
 .person-index-container .person-index-main.data-v-0104d1be {
-  padding-bottom: 40rpx;
+  margin-top: 28rpx;
+  padding: 0 30rpx;
 }
 .person-index-container .person-index-main .main-every.data-v-0104d1be {
   margin-bottom: 20rpx;
-  padding: 40rpx;
+  padding: 30rpx;
   background-color: #fff;
+  box-shadow: 0 6rpx 6rpx -3rpx rgba(147, 169, 182, 0.11);
+  border-radius: 20rpx;
 }
 .person-index-container .person-index-main .main-every .every-top.data-v-0104d1be {
   display: flex;
   justify-content: space-between;
-  font-size: 32rpx;
+  font-size: 30rpx;
   font-weight: bold;
+}
+.person-index-container .person-index-main .main-every .every-top .top-name.data-v-0104d1be {
+  color: #061D4C;
 }
 .person-index-container .person-index-main .main-every .every-top .top-name .top-urg.data-v-0104d1be {
   margin-left: 10rpx;
@@ -74,7 +123,7 @@
 .person-index-container .person-index-main .main-every .every-top .top-money.data-v-0104d1be {
   display: flex;
   align-items: center;
-  color: #85dbd0;
+  color: #FF4F3E;
 }
 .person-index-container .person-index-main .main-every .every-top .top-money .welfare.data-v-0104d1be {
   display: flex;
@@ -84,7 +133,7 @@
   width: 6rpx;
   height: 6rpx;
   margin: 0 10rpx;
-  background-color: #85DBD0;
+  background-color: #FF4F3E;
   border-radius: 50%;
 }
 .person-index-container .person-index-main .main-every .every-second.data-v-0104d1be {
@@ -93,37 +142,40 @@
   flex-wrap: wrap;
 }
 .person-index-container .person-index-main .main-every .every-second .second-every.data-v-0104d1be {
-  padding: 10rpx 20rpx;
+  padding: 11rpx;
   margin-right: 20rpx;
-  background-color: #f1f1f1;
-  color: #A9A5A0;
-  font-size: 22rpx;
+  background-color: #e4f8f6;
+  color: #42CFBC;
+  font-size: 20rpx;
   text-align: center;
+  border-radius: 6rpx;
+  font-weight: bold;
 }
 .person-index-container .person-index-main .main-every .second-third.data-v-0104d1be {
   margin-top: 20rpx;
-  font-size: 28rpx;
-  color: #0E151D;
+  font-size: 24rpx;
+  color: #A3B3CC;
 }
 .person-index-container .person-index-main .main-every .second-four.data-v-0104d1be {
   margin-top: 30rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 26rpx;
-  color: #c3c3c3;
+  font-size: 20rpx;
+  color: #98AAC6;
 }
 .person-index-container .person-index-main .main-every .second-four .four-left.data-v-0104d1be {
   display: flex;
   align-items: center;
 }
 .person-index-container .person-index-main .main-every .second-four .four-left .four-img.data-v-0104d1be {
-  width: 60rpx;
-  height: 60rpx;
+  width: 40rpx;
+  height: 40rpx;
   border-radius: 50%;
 }
 .person-index-container .person-index-main .main-every .second-four .four-left .four-name.data-v-0104d1be {
-  margin-left: 20rpx;
-  color: #0E151D;
+  margin-left: 9rpx;
+  color: #061D4C;
+  font-size: 22rpx;
 }
 

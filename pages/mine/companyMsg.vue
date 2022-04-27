@@ -1,65 +1,62 @@
 <template>
-	<view class="page-container">
-		<!-- 企业认证 -->
-		<view class="person-msg-container">
-			<!--  :rules="personMsgRules" :modelValue="companyMsgData" -->
-			<uni-forms class="msg-main" ref="personMsg">
-				<uni-forms-item name="companyName">
-					<view class="msg-every">
-						<view class="every-title">公司名称</view>
-						<input class="every-input" placeholder="请输入公司名称" placeholder-style="color: #dadada;" type="text"
-							v-model="companyMsgData.companyName" />
-					</view>
-				</uni-forms-item>
-				<uni-forms-item name="businessPhoto">
-					<view class="msg-every">
-						<view class="every-title">营业执照</view>
-						<view class="instructions-imgs every-input">
-							<view class="imgs-upload" @click="uploadImgs">
-								<image src="../../static/imgs/common/camera.png" mode="aspectFill"></image>
-								<text>上传图片</text>
-							</view>
-							<view class="imgs-list" v-for="(item,index) in companyMsgData.businessPhoto" :key="index">
-								<image v-if="item" :src="imgUrl + '/' + item" mode="aspectFill"></image>
-								<view class="img-del" @click="delImg(index)">x</view>
-							</view>
+	<!-- 企业认证 -->
+	<view class="person-msg-container">
+		<!--  :rules="personMsgRules" :modelValue="companyMsgData" -->
+		<uni-forms ref="personMsg">
+			<uni-forms-item name="companyName">
+				<view class="msg-every">
+					<view class="every-title">公司名称</view>
+					<input class="every-input" placeholder="请输入公司名称" placeholder-style="color: #506383;" type="text"
+						v-model="companyMsgData.companyName" />
+				</view>
+			</uni-forms-item>
+			<uni-forms-item name="businessPhoto">
+				<view class="msg-every">
+					<view class="every-title">营业执照</view>
+					<view class="instructions-imgs every-input">
+						<view class="imgs-upload" @click="uploadImgs">
+							<image src="../../static/imgs/common/camera.png" mode="aspectFill"></image>
+							<text>上传图片</text>
+						</view>
+						<view class="imgs-list" v-for="(item,index) in companyMsgData.businessPhoto" :key="index">
+							<image v-if="item" :src="imgUrl + '/' + item" mode="aspectFill"></image>
+							<view class="img-del" @click="delImg(index)">x</view>
 						</view>
 					</view>
-				</uni-forms-item>
-				<uni-forms-item>
-					<view class="msg-every">
-						<view class="every-title">公司地址（省市区）</view>
-						<pick-regions @getRegion="handleGetRegion">
-							<input class="every-input" placeholder="点击选择公司地址" placeholder-style="color: #dadada;"
-								type="text" v-model="companyMsgData.companyAddress.provinces" />
-						</pick-regions>
+				</view>
+			</uni-forms-item>
+			<uni-forms-item>
+				<view class="msg-every">
+					<view class="every-title">公司地址（省市区）</view>
+					<pick-regions @getRegion="handleGetRegion">
+						<input class="every-input" placeholder="点击选择公司地址" placeholder-style="color: #506383;"
+							type="text" v-model="companyMsgData.companyAddress.provinces" />
+					</pick-regions>
+				</view>
+			</uni-forms-item>
+			<uni-forms-item>
+				<view class="msg-every">
+					<view class="every-title">详细地址</view>
+					<input class="every-input" placeholder="请输入详细地址" placeholder-style="color: #506383;" type="text"
+						v-model="companyMsgData.companyAddress.detail" />
+				</view>
+			</uni-forms-item>
+			<uni-forms-item>
+				<view class="msg-every">
+					<view class="every-title">团队规模</view>
+					<view class="number-input">
+						<input class="every-input" style="text-align: center;" placeholder="请输入"
+							placeholder-style="color: #506383;" type="text"
+							v-model="companyMsgData.scaleNumber.start" />
+						<text style="color: #061D4C;"> 至 </text>
+						<input class="every-input" style="text-align: center;" placeholder="请输入"
+							placeholder-style="color: #506383;" type="text" v-model="companyMsgData.scaleNumber.end" />
+						<text style="color: #061D4C;"> 人</text>
 					</view>
-				</uni-forms-item>
-				<uni-forms-item>
-					<view class="msg-every">
-						<view class="every-title">详细地址</view>
-						<input class="every-input" placeholder="请输入详细地址" placeholder-style="color: #dadada;" type="text"
-							v-model="companyMsgData.companyAddress.detail" />
-					</view>
-				</uni-forms-item>
-				<uni-forms-item>
-					<view class="msg-every">
-						<view class="every-title">团队规模</view>
-						<view class="number-input">
-							<input class="every-input" style="text-align: center;" placeholder="请输入"
-								placeholder-style="color: #dadada;" type="text"
-								v-model="companyMsgData.scaleNumber.start" />
-							<text> 至 </text>
-							<input class="every-input" style="text-align: center;" placeholder="请输入"
-								placeholder-style="color: #dadada;" type="text"
-								v-model="companyMsgData.scaleNumber.end" />
-							<text> 人</text>
-						</view>
-					</view>
-				</uni-forms-item>
-			</uni-forms>
-			<view class="msg-button" @click="personalDataSubmit">提 交</view>
-		</view>
+				</view>
+			</uni-forms-item>
+		</uni-forms>
+		<view class="msg-button" @click="personalDataSubmit">提 交</view>
 	</view>
 </template>
 
@@ -246,7 +243,7 @@
 					},
 					complete: (res) => {
 						console.log(res);
-						if (res.statusCode === 200) {
+						if (res.data.code === 200) {
 							uni.showToast({
 								title: "信息提交成功，等待审核",
 								icon: "none",
@@ -271,104 +268,99 @@
 
 <style scoped lang="scss">
 	.person-msg-container {
-		height: 100vh;
-		padding: 0 40rpx;
-		padding-bottom: 40rpx;
+		padding: 30rpx 30rpx 36rpx;
 		background-color: #fff;
-		border-top: 2rpx solid #f9f9f9;
+		border-top: 10rpx solid #EFF6FF;
 
-		.msg-main {
-			padding: 20rpx;
+		.msg-every {
+			padding-bottom: 30rpx;
+			border-bottom: 2rpx solid #EFF6FF;
 
-			.msg-every {
-				padding-bottom: 20rpx;
-				border-bottom: 2rpx solid #f9f9f9;
+			.every-title {
+				font-size: 30rpx;
+				color: #061D4C;
+				font-weight: bold;
+			}
 
-				.every-title {
-					font-size: 26rpx;
-					color: #aaa;
+			.every-input {
+				margin-top: 19rpx;
+				font-size: 26rpx;
+				color: #506383;
+
+				image {
+					width: 100rpx;
+					height: 100rpx;
+					border-radius: 50%;
 				}
+			}
 
-				.number-input {
+			.number-input {
+				display: flex;
+				align-items: baseline;
+			}
+
+			.instructions-imgs {
+				display: flex;
+				flex-wrap: wrap;
+
+				.imgs-upload {
+					width: 160rpx;
+					height: 160rpx;
 					display: flex;
-					align-items: baseline;
-				}
-
-				.every-input {
-					margin-top: 20rpx;
-					font-size: 30rpx;
-					color: #000;
+					flex-direction: column;
+					justify-content: center;
+					text-align: center;
+					border: 1px dashed #c3c3c3;
 
 					image {
-						width: 100rpx;
-						height: 100rpx;
-						border-radius: 50%;
+						width: 64rpx;
+						height: 64rpx;
+						margin: 0 auto;
+					}
+
+					text {
+						font-size: 22rpx;
+						color: #aaa;
 					}
 				}
 
-				.instructions-imgs {
-					display: flex;
-					flex-wrap: wrap;
+				.imgs-list {
+					margin-left: 20rpx;
+					margin-bottom: 40rpx;
+					position: relative;
 
-					.imgs-upload {
+					image {
 						width: 160rpx;
 						height: 160rpx;
-						display: flex;
-						flex-direction: column;
-						justify-content: center;
-						text-align: center;
-						border: 1px dashed #c3c3c3;
-
-						image {
-							width: 64rpx;
-							height: 64rpx;
-							margin: 0 auto;
-						}
-
-						text {
-							font-size: 22rpx;
-							color: #aaa;
-						}
+						border-radius: 10rpx;
 					}
 
-					.imgs-list {
-						margin-left: 20rpx;
-						margin-bottom: 40rpx;
-						position: relative;
-
-						image {
-							width: 160rpx;
-							height: 160rpx;
-							border-radius: 10rpx;
-						}
-
-						.img-del {
-							position: absolute;
-							left: 130rpx;
-							top: -20rpx;
-							width: 40rpx;
-							height: 40rpx;
-							display: flex;
-							align-items: center;
-							justify-content: center;
-							border-radius: 50%;
-							background-color: #f9f9f9;
-							color: #aaa;
-							font-size: 28rpx;
-						}
+					.img-del {
+						position: absolute;
+						left: 130rpx;
+						top: -20rpx;
+						width: 40rpx;
+						height: 40rpx;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						border-radius: 50%;
+						background-color: #f9f9f9;
+						color: #aaa;
+						font-size: 28rpx;
 					}
 				}
 			}
 		}
 
 		.msg-button {
-			padding: 20rpx 0;
-			margin: 0 40rpx;
-			font-size: 26rpx;
+			margin-top: 17rpx;
+			padding: 31rpx 0;
+			font-size: 30rpx;
 			color: #fff;
-			background-color: #85dbd0;
+			background: linear-gradient(to bottom, #5EDAF5, #5EB7F5);
 			text-align: center;
-			border-radius: 60rpx;
+			border-radius: 45rpx;
 		}
 	}
 </style>

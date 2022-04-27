@@ -1,17 +1,21 @@
 <template>
 	<view class="person-index-container">
 		<!-- 个人首页 -->
-		<view class="index-top" style="padding-top: 60rpx;">
-			<navigator url="../search/jobSearch" hover-class="none">
-				<view class="top-main">
+		<view class="top-search">
+			<navigator url="../search/jobSearch" hover-class="none" class="search-left">
+				<view class="left-img">
 					<image src="../../static/imgs/common/search.png" mode="aspectFill"></image>
-					<view class="index-top-input"> 搜索商品 </view>
+				</view>
+				<view style="flex: 1;" class="left-input">
+					{{keyword ? keyword : '搜索商品'}}
 				</view>
 			</navigator>
-		</view>
-		<view class="index-top">
-			<navigator url="../search/jobScreen" hover-class="none">
-				<view class="index-top-input" style="text-align: right;"> 筛选 </view>
+			<navigator
+				:url="'../search/jobScreen?major=' + JSON.stringify(major) + '&salary=' + salary + '&workExperience=' + JSON.stringify(workExperience) + '&teamSize=' + JSON.stringify(teamSize)"
+				hover-class="none">
+				<view class="search-right">
+					<image src="../../static/imgs/common/filter.png" mode="aspectFill"></image>
+				</view>
 			</navigator>
 		</view>
 		<view v-if="haveData == 0" class="no-data">
@@ -55,11 +59,17 @@
 				</navigator>
 			</view>
 		</view>
+		<view class="uni-p-b-98"></view>　
+		<tabBar :pagePath="'/pages/index/personageIndex'"></tabBar>
 	</view>
 </template>
 
 <script>
+	import tabBar from '../../components/tabbar.vue'
 	export default {
+		components: {
+			tabBar
+		},
 		data() {
 			return {
 				imgUrl: this.$baseUrl,
@@ -69,36 +79,29 @@
 				jobList: [],
 				city: "",
 				keyword: "",
-				major: [],
-				salary: "",
-				workExperience: [],
-				teamSize: [],
-
+				major: ["不限"],
+				salary: "不限",
+				workExperience: ["不限"],
+				teamSize: ["不限"],
 			}
 		},
+		// onShow() {
+		// 	if (uni.getStorageSync('role') == 1) {
+		// 		uni.setTabBarItem({
+		// 			index: 0,
+		// 			pagePath: "/pages/index/enterpriseIndex",
+		// 			text: "人才库",
+		// 			iconPath: "/static/imgs/tabBar/work.png",
+		// 			selectedIconPath: "/static/imgs/tabBar/work01.png"
+		// 		})
+		// 	}
+		// },
 		onShow() {
-			let role = uni.getStorageSync("role");
-			console.log(role);
-			if (role == 1) {
-				uni.setTabBarItem({
-					index: 0,
-					text: "人才库",
-					pagePath: "/pages/index/enterpriseIndex",
-					success: (res) => {
-						console.log(res);
-						uni.switchTab({
-							url: './enterpriseIndex',
-							success: (ret) => {
-								console.log(ret)
-							}
-						});
-					}
-				})
-			} else {
-				this.getJobList();
-			}
+			this.chat_updateReddot();
 		},
 		onLoad() {
+			uni.hideTabBar()
+			this.getJobList();
 			uni.$on('jobScreenData', e => {
 				this.major = e.major;
 				this.salary = e.salary;
@@ -106,6 +109,8 @@
 				this.teamSize = e.teamSize;
 				this.city = '';
 				this.keyword = '';
+				this.jobList = [];
+				this.page = 1;
 				this.getJobList();
 			});
 			uni.$on('searchKeyword', e => {
@@ -115,6 +120,8 @@
 				this.salary = '';
 				this.workExperience = [];
 				this.teamSize = [];
+				this.jobList = [];
+				this.page = 1;
 				this.getJobList();
 			})
 		},
@@ -192,7 +199,57 @@
 <style lang="scss" scoped>
 	.person-index-container {
 		min-height: 100vh;
-		background-color: #f1f1f1;
+		background-color: #f3f7fa;
+
+		.top-search {
+			padding: 125rpx 30rpx 30rpx;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			background: linear-gradient(to bottom, #5EB7F5, #5EDAF5);
+
+			.search-left {
+				height: 75rpx;
+				display: flex;
+				align-items: center;
+				padding: 0 31rpx;
+				margin-right: 29rpx;
+				background-color: #fff;
+				border-radius: 18.75px;
+				flex: 1;
+				box-shadow: 0 12rpx 12rpx -4rpx rgba(94, 183, 245, 0.11);
+
+				.left-img {
+					margin-right: 20rpx;
+
+					image {
+						width: 24rpx;
+						height: 24rpx;
+					}
+				}
+
+				.left-input {
+					font-size: 24rpx;
+					color: #ADBBD1;
+				}
+			}
+
+			.search-right {
+				width: 75rpx;
+				height: 75rpx;
+				background-color: #fff;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				box-shadow: 0 12rpx 12rpx -4rpx rgba(94, 183, 245, 0.11);
+
+				image {
+					width: 27rpx;
+					height: 30rpx;
+				}
+			}
+		}
 
 		.index-top {
 			padding: 20rpx 52rpx;
@@ -221,20 +278,24 @@
 		}
 
 		.person-index-main {
-			padding-bottom: 40rpx;
+			margin-top: 28rpx;
+			padding: 0 30rpx;
 
 			.main-every {
 				margin-bottom: 20rpx;
-				padding: 40rpx;
+				padding: 30rpx;
 				background-color: #fff;
+				box-shadow: 0 6rpx 6rpx -3rpx rgba(147, 169, 182, 0.11);
+				border-radius: 20rpx;
 
 				.every-top {
 					display: flex;
 					justify-content: space-between;
-					font-size: 32rpx;
+					font-size: 30rpx;
 					font-weight: bold;
 
 					.top-name {
+						color: #061D4C;
 
 						.top-urg {
 							margin-left: 10rpx;
@@ -248,7 +309,7 @@
 					.top-money {
 						display: flex;
 						align-items: center;
-						color: #85dbd0;
+						color: #FF4F3E;
 
 						.welfare {
 							display: flex;
@@ -258,7 +319,7 @@
 								width: 6rpx;
 								height: 6rpx;
 								margin: 0 10rpx;
-								background-color: #85DBD0;
+								background-color: #FF4F3E;
 								border-radius: 50%;
 							}
 						}
@@ -271,19 +332,21 @@
 					flex-wrap: wrap;
 
 					.second-every {
-						padding: 10rpx 20rpx;
+						padding: 11rpx;
 						margin-right: 20rpx;
-						background-color: #f1f1f1;
-						color: #A9A5A0;
-						font-size: 22rpx;
+						background-color: rgb(228, 248, 246);
+						color: #42CFBC;
+						font-size: 20rpx;
 						text-align: center;
+						border-radius: 6rpx;
+						font-weight: bold;
 					}
 				}
 
 				.second-third {
 					margin-top: 20rpx;
-					font-size: 28rpx;
-					color: #0E151D;
+					font-size: 24rpx;
+					color: #A3B3CC;
 				}
 
 				.second-four {
@@ -291,22 +354,23 @@
 					display: flex;
 					align-items: center;
 					justify-content: space-between;
-					font-size: 26rpx;
-					color: #c3c3c3;
+					font-size: 20rpx;
+					color: #98AAC6;
 
 					.four-left {
 						display: flex;
 						align-items: center;
 
 						.four-img {
-							width: 60rpx;
-							height: 60rpx;
+							width: 40rpx;
+							height: 40rpx;
 							border-radius: 50%;
 						}
 
 						.four-name {
-							margin-left: 20rpx;
-							color: #0E151D;
+							margin-left: 9rpx;
+							color: #061D4C;
+							font-size: 22rpx;
 						}
 					}
 				}

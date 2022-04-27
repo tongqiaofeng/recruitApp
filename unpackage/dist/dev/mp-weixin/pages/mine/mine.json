@@ -1,6 +1,7 @@
 {
-  "navigationBarTitleText": "我的",
+  "navigationBarTitleText": "",
+  "navigationStyle": "custom",
   "usingComponents": {
-    "adminstar": "/pages/mine/adminstar"
+    "tab-bar": "/components/tabbar"
   }
 }

@@ -1,6 +1,9 @@
 {
   "navigationBarTitleText": "职位管理",
   "navigationBarBackgroundColor": "#fff",
+  "navigationStyle": "custom",
   "enablePullDownRefresh": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "slide-list": "/components/left-slide/left-slide-list"
+  }
 }

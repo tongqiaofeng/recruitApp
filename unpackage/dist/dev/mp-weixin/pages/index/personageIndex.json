@@ -4,5 +4,7 @@
   "navigationBarBackgroundColor": "#85dbd0",
   "enablePullDownRefresh": true,
   "navigationStyle": "custom",
-  "usingComponents": {}
+  "usingComponents": {
+    "tab-bar": "/components/tabbar"
+  }
 }

@@ -1,0 +1,1 @@
+<view><view class="uni-p-b-98"></view><block wx:if="{{role!=2}}"><tab-bar vue-id="8dd740cc-1" pagePath="{{pagePath}}" bind:__l="__l"></tab-bar></block></view>

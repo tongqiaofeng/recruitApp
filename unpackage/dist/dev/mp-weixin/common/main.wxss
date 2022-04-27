@@ -760,10 +760,13 @@
 /*每个页面公共css */
 .page-container {
   height: 100vh;
-  background-color: #f9f9f9;
+  background-color: #f3f7fa;
+}
+.uni-p-b-98 {
+  padding-bottom: 100rpx;
 }
 .no-data {
-  padding-top: 450rpx;
+  padding-top: 250rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;

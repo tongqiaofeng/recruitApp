@@ -3,17 +3,16 @@
 		<!-- 搜索页面 -->
 		<view class="search-top">
 			<view class="search-top-main">
-				<navigator :url="'../common/city?cityNow=' + city" hover-class="none">
+				<navigator style="display: flex;align-items: center;" :url="'../common/city?cityNow=' + city" hover-class="none">
 					<view class="top-main-city">{{city}}</view>
+					<image class="top-main-triangle" src="../../static/imgs/index/to_bottom.png" mode="aspectFill">
+					</image>
 				</navigator>
-				<view class="top-main-triangle"></view>
-				<view class="top-main-line"></view>
-				<uni-easyinput class="top-main-input" type="text" placeholder="搜索职位、公司"
-					placeholder-style="color: #c3c3c3;font-size: 26rpx;" :inputBorder="false" v-model="keyword" />
+				<uni-easyinput prefixIcon="search" class="top-main-input" type="text" placeholder="搜索职位、公司"
+					placeholder-style="color: #ADBBD1;font-size: 26rpx;" :inputBorder="false" v-model="keyword" />
 			</view>
-			<view class="search-top-button" v-show="keyword" @click="searchKeyword">搜索</view>
+			<view class="search-top-button" @click="searchKeyword">确定</view>
 		</view>
-		<view class="search-line"></view>
 		<view class="search-history">
 			<view class="search-history-title">历史搜索</view>
 			<view class="search-history-main">
@@ -32,10 +31,11 @@
 			return {
 				city: "成都",
 				keyword: "",
-				searchKeyList: ['前端开发', '后端开发']
+				searchKeyList: []
 			}
 		},
 		onLoad() {
+			this.getKeywordHistory();
 			// 城市
 			uni.$on('selCity', (e) => {
 				console.log('选中的城市值');
@@ -44,6 +44,21 @@
 			});
 		},
 		methods: {
+			// 获取模糊搜索记录
+			getKeywordHistory(){
+				uni.request({
+					url: this.$baseUrl + '/jobSearchKeywordList',
+					header: {
+						"content-type": "application/json",
+						"token": uni.getStorageSync('token')
+					},
+					complete: (res) => {
+						console.log('历史搜索');
+						console.log(res);
+						this.searchKeyList = res.data.data;
+					}
+				})
+			},
 			// 模糊搜索
 			searchKeyword() {
 				uni.$emit('searchKeyword', {
@@ -63,54 +78,44 @@
 	}
 </script>
 
+<style lang="scss">
+	.uni-easyinput {
+		color: #ADBBD1 !important;
+	}
+</style>
 <style lang="scss" scoped>
 	.search-container {
 		height: 100vh;
+		padding: 30rpx 29rpx 0;
+		background-color: #f3f7fa;
 
 		.search-top {
-			padding: 20rpx 30rpx;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
 
 			.search-top-main {
-				padding: 5rpx 30rpx;
 				display: flex;
 				flex: 1;
 				align-items: center;
-				background-color: #f9f9f9;
-				border-radius: 60rpx;
-				font-size: 30rpx;
-				color: #c3c3c3;
-
-				.top-main-city,
-				.top-main-triangle,
-				.top-main-line {
-					margin-right: 10rpx;
-				}
 
 				.top-main-city {
-					color: #7b7b7b;
+					color: #061D4C;
+					font-size: 26rpx;
 				}
 
 				.top-main-triangle {
-					width: 0;
-					height: 0;
-					border-width: 10rpx 10rpx 0;
-					border-style: solid;
-					border-color: #c3c3c3 transparent transparent;
-				}
-
-				.top-main-line {
-					width: 2rpx;
-					height: 25rpx;
-					background-color: #c3c3c3;
+					width: 20rpx;
+					height: 12rpx;
+					margin: 0 16rpx;
 				}
 
 				.top-main-input {
 					flex: 1;
-					color: #7b7b7b;
+					color: #ADBBD1;
 					font-size: 26rpx;
+					background-color: #fff;
+					border-radius: 33rpx;
 				}
 			}
 
@@ -119,20 +124,18 @@
 				font-size: 28rpx;
 			}
 		}
-
-		.search-line {
-			width: 100%;
-			height: 2rpx;
-			background-color: #ddd;
-		}
-
+		
 		.search-history {
-			padding: 40rpx 30rpx;
+			margin-top: 20rpx;
+			padding: 29rpx 29rpx 37rpx;
+			background-color: #fff;
+			border-radius: 20rpx;
 
 			.search-history-title {
-				margin-bottom: 20rpx;
+				margin-bottom: 37rpx;
 				font-size: 30rpx;
 				font-weight: bold;
+				color: #061D4C;
 			}
 
 			.search-history-main {
@@ -140,11 +143,12 @@
 				justify-content: flex-start;
 
 				.history-main-every {
-					padding: 10rpx 20rpx;
-					margin-right: 10rpx;
-					background-color: #f9f9f9;
+					padding: 7rpx 10rpx;
+					margin-right: 30rpx;
+					background-color: #f3f7fa;
 					border-radius: 8rpx;
-					font-size: 20rpx;
+					font-size: 22rpx;
+					color: #061D4C;
 				}
 			}
 		}

@@ -1,0 +1,1 @@
+<view><view class="uni-p-b-98"></view><tab-bar vue-id="c31923fa-1" pagePath="/pages/index/personageIndex" bind:__l="__l"></tab-bar></view>

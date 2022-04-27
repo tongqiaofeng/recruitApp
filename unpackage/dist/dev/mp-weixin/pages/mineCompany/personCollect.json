@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "人才收藏",
   "navigationBarBackgroundColor": "#fff",
-  "usingComponents": {}
+  "usingComponents": {
+    "uni-popup": "/uni_modules/uni-popup/components/uni-popup/uni-popup"
+  }
 }

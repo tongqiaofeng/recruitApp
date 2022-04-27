@@ -7,36 +7,10 @@
 		<view v-else>
 			<view class="every" v-for="(item,index) in favoriteslist" :key="index" @longtap="openDelPage(item)"
 				@click="goUserDetails(item)">
-				<view class="every-one">
-					<view class="one-left">
-						{{item.name}}
-					</view>
-					<view class="one-right">
-						{{item.lowestSalary+ '-'+item.highestSalary}}{{item.type == '实习/兼职' ? '元' : 'K'}}
-						<view class="right-con" v-if="item.welfare">
-							<view class="circle"></view>
-							{{item.welfare + '薪'}}
-						</view>
-					</view>
-				</view>
-				<view class="every-two">
-					{{item.companyName}}
-				</view>
-				<view class="every-three">
-					<view class="three">
-						{{item.workLocation}}
-					</view>
-					<view class="three">
-						{{item.workExperience}}
-					</view>
-					<view class="three">
-						{{item.major}}
-					</view>
-				</view>
 				<view class="every-four">
-					<image class="four-img" :src="imgUrl + '/' + item.issuerHeadPic" mode="aspectFill"></image>
+					<image class="four-img" :src="imgUrl + '/' + item.headPic" mode="aspectFill"></image>
 					<view class="four-name">
-						{{item.issuerFullName}}
+						{{item.fullName}}
 					</view>
 				</view>
 			</view>
@@ -74,7 +48,7 @@
 				selList: [],
 
 				selName: '',
-				
+
 			};
 		},
 		onLoad() {
@@ -87,11 +61,11 @@
 		},
 		methods: {
 			// 取消
-			cancleDel(){
+			cancleDel() {
 				this.$refs.delPopup.close();
 			},
 			// 确定
-			sureDel(){
+			sureDel() {
 				this.clickclose();
 				this.$refs.delPopup.close();
 			},
@@ -116,7 +90,7 @@
 					title: "加载中...",
 				});
 				uni.request({
-					url: this.$baseUrl + "/favoritePersonList",
+					url: this.$baseUrl + "/favoritePersonList?page=" + this.page + '&pageNum=10',
 					header: {
 						"content-type": "application/json",
 						token: uni.getStorageSync("token"),
@@ -128,6 +102,7 @@
 						console.log(res);
 
 						this.favoriteslist = res.data.data.list;
+						console.log(this.favoriteslist)
 
 						if (this.favoriteslist.length == 0) {
 							this.haveData = 0;
@@ -279,25 +254,25 @@
 				font-size: 38rpx;
 				font-weight: bold;
 			}
-			
-			.popup-main{
+
+			.popup-main {
 				margin-top: 40rpx;
 				color: #A9A5A0;
 				font-size: 24rpx;
 			}
-			
-			.popup-button{
+
+			.popup-button {
 				margin-top: 80rpx;
 				display: flex;
 				justify-content: flex-end;
 				font-size: 30rpx;
 				font-weight: bold;
-				
-				.cancle{
+
+				.cancle {
 					color: #A9A5A0;
 				}
-				
-				.sure{
+
+				.sure {
 					margin-left: 80rpx;
 					color: #85dbd0;
 				}

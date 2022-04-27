@@ -1,11 +1,59 @@
 <script>
 	export default {
+		globalData: {
+			userInfo: {},
+			chatInfo: {
+				userId: 0,
+				token: ''
+			},
+			userList: [], //聊天用户列表
+			chatUserId: '', //当前与我聊天的用户的userId
+			adminList: [],
+			tabBarList: [{
+					"pagePath": "/pages/index/personageIndex",
+					"text": "找工作",
+					"iconPath": "/static/imgs/tabBar/work.png",
+					"selectedIconPath": "/static/imgs/tabBar/work01.png"
+				},
+				{
+					"pagePath": "/pages/message/message",
+					"text": "消息",
+					"iconPath": "/static/imgs/tabBar/msg.png",
+					"selectedIconPath": "/static/imgs/tabBar/msg01.png"
+				},
+				{
+					"pagePath": "/pages/mine/mine",
+					"text": "我的",
+					"iconPath": "/static/imgs/tabBar/mine.png",
+					"selectedIconPath": "/static/imgs/tabBar/mine01.png"
+				}
+			],
+			isRed: false
+		},
 		data() {
 			return {
-				token: uni.getStorageSync('token')
+				token: uni.getStorageSync('token'),
 			}
 		},
 		onLaunch() {
+			this.token = uni.getStorageSync('token');
+			console.log('token的值', this.token)
+			if (!this.token) {
+				uni.reLaunch({
+					url: 'pages/mine/login',
+					success: () => {
+						//#ifdef APP-PLUS  
+						plus.navigator.closeSplashscreen();
+						//#endif
+					}
+				})
+			} else {
+				this.getUserInfo();
+				//#ifdef APP-PLUS  
+				plus.navigator.closeSplashscreen();
+				//#endif
+			}
+
 			// #ifdef APP-PLUS-NVUE
 			// 加载公共图标库
 			const domModule = weex.requireModule('dom')
@@ -14,10 +62,12 @@
 				'src': "url('https://at.alicdn.com/t/font_2961319_02fxlfneetwr.ttf?t=1637726330205') ";
 			});
 			// #endif
+
 			// 监听键盘高度变化
 			uni.onKeyboardHeightChange(res => {
 				this.$store.commit('changeKeyboardHeight', res.height)
 			})
+
 			//#ifdef APP-PLUS  
 			console.log('APP升级更新');
 			let type = uni.getSystemInfoSync().platform;
@@ -52,15 +102,6 @@
 				}
 			})
 			//#endif  
-			
-			this.token = uni.getStorageSync('token');
-			if (this.token == '' || this.token == null) {
-				uni.navigateTo({
-					url: "pages/mine/login"
-				})
-			} else {
-				this.getUserInfo();
-			}
 		},
 		onShow() {
 			this.$store.dispatch('reconnect')
@@ -82,11 +123,15 @@
 	/*每个页面公共css */
 	.page-container {
 		height: 100vh;
-		background-color: #f9f9f9;
+		background-color: #f3f7fa;
+	}
+
+	.uni-p-b-98 {
+		padding-bottom: 100rpx;
 	}
 
 	.no-data {
-		padding-top: 450rpx;
+		padding-top: 250rpx;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;

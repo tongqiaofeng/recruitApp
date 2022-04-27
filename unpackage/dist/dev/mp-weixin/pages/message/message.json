@@ -1,8 +1,8 @@
 {
-  "navigationBarTitleText": "消息",
+  "navigationBarTitleText": "",
+  "navigationStyle": "custom",
   "usingComponents": {
-    "free-nav-bar": "/components/free-ui/free-nav-bar",
-    "free-media-list": "/components/free-ui/free-media-list",
-    "free-popup": "/components/free-ui/free-popup"
+    "tab-bar": "/components/tabbar",
+    "option-list": "/components/gzz-option-list/option-list"
   }
 }

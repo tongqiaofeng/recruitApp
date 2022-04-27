@@ -25,42 +25,38 @@
 /* 透明度 */
 /* 文章场景相关 */
 .person-msg-container.data-v-5851b997 {
-  height: 100vh;
-  padding: 0 40rpx;
-  padding-bottom: 40rpx;
+  padding: 30rpx 30rpx 36rpx;
   background-color: #fff;
-  border-top: 2rpx solid #f9f9f9;
+  border-top: 10rpx solid #EFF6FF;
 }
-.person-msg-container .msg-main.data-v-5851b997 {
-  padding: 20rpx;
+.person-msg-container .msg-every.data-v-5851b997 {
+  padding-bottom: 30rpx;
+  border-bottom: 2rpx solid #EFF6FF;
 }
-.person-msg-container .msg-main .msg-every.data-v-5851b997 {
-  padding-bottom: 20rpx;
-  border-bottom: 2rpx solid #f9f9f9;
-}
-.person-msg-container .msg-main .msg-every .every-title.data-v-5851b997 {
-  font-size: 26rpx;
-  color: #aaa;
-}
-.person-msg-container .msg-main .msg-every .number-input.data-v-5851b997 {
-  display: flex;
-  align-items: baseline;
-}
-.person-msg-container .msg-main .msg-every .every-input.data-v-5851b997 {
-  margin-top: 20rpx;
+.person-msg-container .msg-every .every-title.data-v-5851b997 {
   font-size: 30rpx;
-  color: #000;
+  color: #061D4C;
+  font-weight: bold;
 }
-.person-msg-container .msg-main .msg-every .every-input image.data-v-5851b997 {
+.person-msg-container .msg-every .every-input.data-v-5851b997 {
+  margin-top: 19rpx;
+  font-size: 26rpx;
+  color: #506383;
+}
+.person-msg-container .msg-every .every-input image.data-v-5851b997 {
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
 }
-.person-msg-container .msg-main .msg-every .instructions-imgs.data-v-5851b997 {
+.person-msg-container .msg-every .number-input.data-v-5851b997 {
+  display: flex;
+  align-items: baseline;
+}
+.person-msg-container .msg-every .instructions-imgs.data-v-5851b997 {
   display: flex;
   flex-wrap: wrap;
 }
-.person-msg-container .msg-main .msg-every .instructions-imgs .imgs-upload.data-v-5851b997 {
+.person-msg-container .msg-every .instructions-imgs .imgs-upload.data-v-5851b997 {
   width: 160rpx;
   height: 160rpx;
   display: flex;
@@ -69,26 +65,26 @@
   text-align: center;
   border: 1px dashed #c3c3c3;
 }
-.person-msg-container .msg-main .msg-every .instructions-imgs .imgs-upload image.data-v-5851b997 {
+.person-msg-container .msg-every .instructions-imgs .imgs-upload image.data-v-5851b997 {
   width: 64rpx;
   height: 64rpx;
   margin: 0 auto;
 }
-.person-msg-container .msg-main .msg-every .instructions-imgs .imgs-upload text.data-v-5851b997 {
+.person-msg-container .msg-every .instructions-imgs .imgs-upload text.data-v-5851b997 {
   font-size: 22rpx;
   color: #aaa;
 }
-.person-msg-container .msg-main .msg-every .instructions-imgs .imgs-list.data-v-5851b997 {
+.person-msg-container .msg-every .instructions-imgs .imgs-list.data-v-5851b997 {
   margin-left: 20rpx;
   margin-bottom: 40rpx;
   position: relative;
 }
-.person-msg-container .msg-main .msg-every .instructions-imgs .imgs-list image.data-v-5851b997 {
+.person-msg-container .msg-every .instructions-imgs .imgs-list image.data-v-5851b997 {
   width: 160rpx;
   height: 160rpx;
   border-radius: 10rpx;
 }
-.person-msg-container .msg-main .msg-every .instructions-imgs .imgs-list .img-del.data-v-5851b997 {
+.person-msg-container .msg-every .instructions-imgs .imgs-list .img-del.data-v-5851b997 {
   position: absolute;
   left: 130rpx;
   top: -20rpx;
@@ -103,12 +99,12 @@
   font-size: 28rpx;
 }
 .person-msg-container .msg-button.data-v-5851b997 {
-  padding: 20rpx 0;
-  margin: 0 40rpx;
-  font-size: 26rpx;
+  margin-top: 17rpx;
+  padding: 31rpx 0;
+  font-size: 30rpx;
   color: #fff;
-  background-color: #85dbd0;
+  background: linear-gradient(to bottom, #5EDAF5, #5EB7F5);
   text-align: center;
-  border-radius: 60rpx;
+  border-radius: 45rpx;
 }
 

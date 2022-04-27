@@ -49,7 +49,7 @@
 .job-expectation-container .expectation-main-one .one-type-sel .sel-left.data-v-160f825a,
 .job-expectation-container .expectation-main-one .one-type-sel .sel-right.data-v-160f825a {
   padding: 20rpx 40rpx;
-  border: 2rpx solid #85dbd0;
+  border: 2rpx solid #5EB7F5;
   font-size: 24rpx;
 }
 .job-expectation-container .expectation-main-one .one-type-sel .sel-left.data-v-160f825a {
@@ -88,10 +88,10 @@
   left: 40rpx;
   right: 40rpx;
   bottom: 60rpx;
-  background-color: #85dbd0;
-  border-radius: 12rpx;
+  font-size: 30rpx;
   color: #fff;
-  font-size: 24rpx;
+  background: linear-gradient(to bottom, #5EDAF5, #5EB7F5);
   text-align: center;
+  border-radius: 45rpx;
 }
 

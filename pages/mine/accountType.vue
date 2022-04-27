@@ -2,38 +2,26 @@
 	<view class="return-type-container">
 		<!-- 选择认证类型 -->
 		<navigator url="./personMsg" hover-class="none">
-			<view class="return-type-every">
-				<view class="every-left">
-					<image class="left-img" src="../../static/imgs/mine/right.png" mode="aspectFill"></image>
-					<view class="left-main">
-						<view class="main-top">
-							<text>个人认证</text>
-						</view>
-						<view class="main-bottom">
-							<text>职场牛人</text>
-						</view>
+			<view class="return-type-every person">
+				<view class="left-main">
+					<view class="main-top">
+						<text>个人认证</text>
 					</view>
-				</view>
-				<view class="every-right">
-					<image src="../../static/imgs/common/right.png" mode="aspectFill"></image>
+					<view class="main-bottom">
+						<text>职场牛人</text>
+					</view>
 				</view>
 			</view>
 		</navigator>
 		<navigator url="./companyMsg" hover-class="none">
-			<view class="return-type-every">
-				<view class="every-left">
-					<image class="left-img" src="../../static/imgs/mine/right.png" mode="aspectFill"></image>
-					<view class="left-main">
-						<view class="main-top">
-							<text>企业认证</text>
-						</view>
-						<view class="main-bottom">
-							<text>企业BOSS</text>
-						</view>
+			<view class="return-type-every company">
+				<view class="left-main">
+					<view class="main-top">
+						<text>企业认证</text>
 					</view>
-				</view>
-				<view class="every-right">
-					<image src="../../static/imgs/common/right.png" mode="aspectFill"></image>
+					<view class="main-bottom">
+						<text>企业BOSS</text>
+					</view>
 				</view>
 			</view>
 		</navigator>
@@ -42,46 +30,36 @@
 
 <style lang="scss" scoped>
 	.return-type-container {
-		height: 100vh;
-		padding-top: 10rpx;
-		background-color: #f9f9f9;
+		padding: 10rpx 30rpx 0;
+		border-top: 10rpx solid #EFF6FF;
+
+		.person {
+			background: url(../../static/imgs/mine/person.png);
+			background-size: 100% 100%;
+		}
+
+		.company {
+			background: url(../../static/imgs/mine/company.png);
+			background-size: 100% 100%;
+		}
 
 		.return-type-every {
-			margin: 40rpx;
-			padding: 50rpx 30rpx;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			background-color: #fff;
-			border-radius: 10rpx;
+			padding: 36rpx 0 30rpx;
+			margin-bottom: 20rpx;
 
-			.every-left {
-				display: flex;
+			.left-main {
+				margin-left: 124rpx;
+				color: #fff;
 
-				.left-img {
-					width: 44rpx;
-					height: 44rpx;
+				.main-top {
+					font-size: 30rpx;
+					font-weight: bold;
 				}
 
-				.left-main {
-					margin-left: 40rpx;
-
-					.main-top {
-						font-size: 32rpx;
-					}
-
-					.main-bottom {
-						margin-top: 20rpx;
-						font-size: 24rpx;
-						color: #c3c3c3;
-					}
-				}
-			}
-
-			.every-right {
-				image {
-					width: 32rpx;
-					height: 32rpx;
+				.main-bottom {
+					margin-top: 15rpx;
+					font-size: 20rpx;
+					font-weight: bold;
 				}
 			}
 		}

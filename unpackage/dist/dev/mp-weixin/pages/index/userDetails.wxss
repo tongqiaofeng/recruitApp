@@ -25,55 +25,93 @@
 /* 透明度 */
 /* 文章场景相关 */
 .resume-container.data-v-46dca611 {
-  padding: 0 40rpx;
-  padding-bottom: 60rpx;
+  padding: 10rpx 0 36rpx;
+  background-color: #fff;
+}
+.resume-container .container-top.data-v-46dca611 {
+  padding: 40rpx;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  z-index: 99;
+}
+.resume-container .container-top .top-left.data-v-46dca611 {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #061D4C;
+}
+.resume-container .container-top .top-left .top-left-img.data-v-46dca611 {
+  width: 17rpx;
+  height: 30rpx;
+  margin-right: 30rpx;
+}
+.resume-container .container-top .top-right.data-v-46dca611 {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #5EDAF5, #5EB7F5);
+  border-radius: 50%;
+}
+.resume-container .container-top .top-right .index-img.data-v-46dca611 {
+  width: 48rpx;
+  height: 46rpx;
 }
 .resume-container .update-img.data-v-46dca611 {
   width: 32rpx;
   height: 32rpx;
 }
+.resume-container .top-line.data-v-46dca611 {
+  width: 100vw;
+  background-color: #EFF6FF;
+}
 .resume-container .resume-main-one.data-v-46dca611 {
-  padding: 40rpx 0;
+  padding: 30rpx 0;
+  margin: 0 40rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 4rpx solid #f9f9f9;
+  border-bottom: 2rpx solid #EFF6FF;
 }
 .resume-container .resume-main-one .one-left .left-top.data-v-46dca611 {
-  display: flex;
-  align-items: center;
-  font-size: 32rpx;
+  margin-bottom: 10rpx;
   font-weight: bold;
-}
-.resume-container .resume-main-one .one-left .left-top .name.data-v-46dca611 {
-  margin-right: 10rpx;
+  color: #061D4C;
+  font-size: 38rpx;
   letter-spacing: 4rpx;
 }
 .resume-container .resume-main-one .one-left .left-bottom.data-v-46dca611 {
-  margin-top: 20rpx;
-  font-size: 22rpx;
-  color: #808080;
+  font-size: 26rpx;
+  color: #506383;
 }
 .resume-container .resume-main-one .one-right image.data-v-46dca611 {
-  width: 100rpx;
-  height: 100rpx;
+  width: 120rpx;
+  height: 120rpx;
   border-radius: 50%;
 }
 .resume-container .resume-main-every.data-v-46dca611 {
-  padding: 40rpx 0;
-  border-bottom: 4rpx solid #f9f9f9;
+  padding: 50rpx 0;
+  margin: 0 40rpx;
+  border-bottom: 2rpx solid #f9f9f9;
 }
 .resume-container .resume-main-every .every-title.data-v-46dca611 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: bold;
+  color: #061D4C;
 }
 .resume-container .resume-main-every .every-main.data-v-46dca611 {
-  margin-top: 40rpx;
-  font-size: 24rpx;
-  color: #808080;
+  margin-top: 50rpx;
+  font-size: 28rpx;
+  color: #506383;
   text-align: left;
 }
 .resume-container .resume-main-every .every-main .list-one.data-v-46dca611 {
@@ -82,8 +120,9 @@
   align-items: center;
 }
 .resume-container .resume-main-every .every-main .list-one .list-one-left.data-v-46dca611 {
-  font-size: 24rpx;
-  color: #000;
+  font-size: 28rpx;
+  color: #061D4C;
+  font-weight: bold;
 }
 .resume-container .resume-main-every .every-main .list-one .list-one-right.data-v-46dca611 {
   display: flex;
@@ -91,23 +130,19 @@
 }
 .resume-container .resume-main-every .every-main .list-one .list-one-right text.data-v-46dca611 {
   margin-right: 20rpx;
-  font-size: 22rpx;
-  color: #c3c3c3;
+  font-size: 26rpx;
+  color: #506383;
 }
 .resume-container .resume-main-every .every-main .list-two.data-v-46dca611 {
-  margin-top: 20rpx;
-  color: #c3c3c3;
+  margin-top: 9rpx;
+  color: #506383;
+  font-size: 26rpx;
+}
+.resume-container .resume-main-every .every-main .list-three.data-v-46dca611 {
+  font-size: 26rpx;
+  color: #506383;
 }
 .resume-container .resume-main-every .every-main .list-three .three-title.data-v-46dca611 {
-  padding: 40rpx 0 20rpx;
-}
-.resume-container .resume-button.data-v-46dca611 {
-  padding: 20rpx;
-  margin-top: 80rpx;
-  background-color: #85dbd0;
-  border-radius: 12rpx;
-  color: #fff;
-  font-size: 24rpx;
-  text-align: center;
+  padding: 37rpx 0 10rpx;
 }
 

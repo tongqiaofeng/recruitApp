@@ -1,47 +1,45 @@
 <template>
-	<view class="page-container">
-		<!-- 个人信息 -->
-		<!-- 个人信息及企业认证分别为个人和企业的模块，个人涉及在线简历（包括证书等的上传），企业涉及发布职位等 -->
-		<view class="person-msg-container">
-			<uni-forms class="msg-main" ref="personMsg" :rules="personMsgRules" :modelValue="personMsgData">
-				<uni-forms-item name="idNumber">
-					<view class="msg-every">
-						<!-- <text style="margin-right: 4rpx;color: red;">*</text> -->
-						<view class="every-title">身份证号</view>
-						<input class="every-input" placeholder="请输入身份证号" placeholder-style="color: #dadada;" type="text"
-							v-model="personMsgData.idNumber" @change="idNumChange" />
-					</view>
-				</uni-forms-item>
-				<uni-forms-item name="age">
-					<view class="msg-every">
-						<view class="every-title">年龄</view>
-						<input class="every-input" placeholder="请输入年龄" placeholder-style="color: #dadada;" type="text"
-							v-model="personMsgData.age" />
-					</view>
-				</uni-forms-item>
-				<uni-forms-item name="joinWorkTime">
-					<view class="msg-every">
-						<view class="every-title">参加工作时间</view>
-						<!-- <uni-datetime-picker class="every-input" type="date" :border="false" :clear-icon="false"
+	<!-- 个人信息 -->
+	<!-- 个人信息及企业认证分别为个人和企业的模块，个人涉及在线简历（包括证书等的上传），企业涉及发布职位等 -->
+	<view class="person-msg-container">
+		<uni-forms ref="personMsg" :rules="personMsgRules" :modelValue="personMsgData">
+			<uni-forms-item name="idNumber">
+				<view class="msg-every">
+					<!-- <text style="margin-right: 4rpx;color: red;">*</text> -->
+					<view class="every-title">身份证号</view>
+					<input class="every-input" placeholder="请输入身份证号码" placeholder-style="color: #506383;" type="text"
+						v-model="personMsgData.idNumber" @change="idNumChange" />
+				</view>
+			</uni-forms-item>
+			<uni-forms-item name="age">
+				<view class="msg-every">
+					<view class="every-title">年龄</view>
+					<input class="every-input" placeholder="请输入年龄" placeholder-style="color: #506383;" type="text"
+						v-model="personMsgData.age" />
+				</view>
+			</uni-forms-item>
+			<uni-forms-item name="joinWorkTime">
+				<view class="msg-every">
+					<view class="every-title">参加工作时间</view>
+					<!-- <uni-datetime-picker class="every-input" type="date" :border="false" :clear-icon="false"
 							v-model="personMsgData.joinWorkTime" /> -->
-						<picker mode="date" fields="month" @change="workTimeChange">
-							<input class="every-input" placeholder="点击选择时间" placeholder-style="color: #dadada;"
-								type="text" v-model="personMsgData.joinWorkTime" />
-						</picker>
-					</view>
-				</uni-forms-item>
-				<uni-forms-item name="city">
-					<view class="msg-every">
-						<view class="every-title">现居住城市</view>
-						<pick-regions @getRegion="handleGetRegion">
-							<input class="every-input" placeholder="点击选择居住城市" placeholder-style="color: #dadada;"
-								type="text" v-model="personMsgData.city" />
-						</pick-regions>
-					</view>
-				</uni-forms-item>
-			</uni-forms>
-			<view class="msg-button" @click="personalDataSubmit">提 交</view>
-		</view>
+					<picker mode="date" fields="month" @change="workTimeChange">
+						<input class="every-input" placeholder="点击选择时间" placeholder-style="color: #506383;" type="text"
+							v-model="personMsgData.joinWorkTime" />
+					</picker>
+				</view>
+			</uni-forms-item>
+			<uni-forms-item name="city">
+				<view class="msg-every">
+					<view class="every-title">现居住城市</view>
+					<pick-regions @getRegion="handleGetRegion">
+						<input class="every-input" placeholder="点击选择现居住城市" placeholder-style="color: #506383;"
+							type="text" v-model="personMsgData.city" />
+					</pick-regions>
+				</view>
+			</uni-forms-item>
+		</uni-forms>
+		<view class="msg-button" @click="personalDataSubmit">提 交</view>
 	</view>
 </template>
 
@@ -81,7 +79,7 @@
 			this.personMsgData.idNumber = uni.getStorageSync('idNumber');
 			this.personMsgData.joinWorkTime = uni.getStorageSync('joinWorkTime');
 			this.personMsgData.city = uni.getStorageSync('city');
-			if(this.personMsgData.idNumber.length > 0){
+			if (this.personMsgData.idNumber.length > 0) {
 				this.idNumChange();
 			}
 		},
@@ -154,46 +152,45 @@
 
 <style scoped lang="scss">
 	.person-msg-container {
-		height: 100vh;
-		padding: 0 40rpx;
-		padding-bottom: 40rpx;
+		padding: 0 33rpx;
+		padding-top: 30rpx;
 		background-color: #fff;
-		border-top: 2rpx solid #f9f9f9;
+		border-top: 10rpx solid #EFF6FF;
 
-		.msg-main {
-			padding: 20rpx;
+		.msg-every {
+			padding-bottom: 30rpx;
+			border-bottom: 2rpx solid #EFF6FF;
 
-			.msg-every {
-				padding-bottom: 20rpx;
-				border-bottom: 2rpx solid #f9f9f9;
+			.every-title {
+				font-size: 30rpx;
+				color: #061D4C;
+				font-weight: bold;
+			}
 
-				.every-title {
-					font-size: 26rpx;
-					color: #aaa;
-				}
+			.every-input {
+				margin-top: 19rpx;
+				font-size: 26rpx;
+				color: #506383;
 
-				.every-input {
-					margin-top: 20rpx;
-					font-size: 30rpx;
-					color: #000;
-
-					image {
-						width: 100rpx;
-						height: 100rpx;
-						border-radius: 50%;
-					}
+				image {
+					width: 100rpx;
+					height: 100rpx;
+					border-radius: 50%;
 				}
 			}
 		}
 
 		.msg-button {
-			padding: 20rpx 0;
-			margin: 0 40rpx;
-			font-size: 26rpx;
+			padding: 31rpx 0;
+			position: absolute;
+			bottom: 80rpx;
+			left: 30rpx;
+			right: 30rpx;
+			font-size: 30rpx;
 			color: #fff;
-			background-color: #85dbd0;
+			background: linear-gradient(to bottom, #5EDAF5, #5EB7F5);
 			text-align: center;
-			border-radius: 60rpx;
+			border-radius: 45rpx;
 		}
 	}
 </style>

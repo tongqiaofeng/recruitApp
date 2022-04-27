@@ -1,44 +1,37 @@
 <template>
 	<view class="login-container">
+		<view class="login-title">
+			手机号登录/注册
+		</view>
 		<view class="login-main">
 			<uni-forms ref="loginFormPhone" :modelValue="userData" :rules="loginPhoneRules">
 				<uni-forms-item name="phoneNumber">
-					<view>
-						<text class="phone-num"> 手机号 </text>
-						<view class="phone-main">
-							<image class="phone-img" src="../../static/imgs/mine/login/phone.png" mode="aspectFill">
-							</image>
-							<view class="login-line"></view>
-							<input type="text" class="phone-input" v-model="userData.phoneNumber"
-								placeholder="请输入手机号" />
+					<view class="phone-main">
+						<view class="phone-left">
+							+86
 						</view>
+						<input type="text" class="phone-input" v-model="userData.phoneNumber" placeholder="请输入您的手机号码"
+							placeholder-style="color:#B2BDC5;" />
 					</view>
 				</uni-forms-item>
 				<uni-forms-item name="code">
-					<view>
-						<text class="phone-num code-code"> 验证码 </text>
-						<view class="phone-main code-main">
-							<view class="phone-main-left" style="flex: 1;">
-								<image style="width: 27rpx; margin-right: 3rpx" class="phone-img"
-									src="../../static/imgs/mine/login/code.png" mode="aspectFill">
-								</image>
-								<view class="login-line"></view>
-								<input type="text" class="phone-input" v-model="userData.code" placeholder="请输入验证码" />
-							</view>
-							<view class="phone-main-left">
-								<view class="login-line"></view>
-								<button type="text" size="mini" :plain="true"
-									style="border: none;padding: 0;height: 17px;line-height: 17px;" @click="getCode"
-									class="phone-num" :disabled="disable"
-									:class="{ codeGeting: isGeting }">{{time}}</button>
-							</view>
+					<view class="phone-main code-main">
+						<view class="phone-main-left" style="flex: 1;">
+							<input type="text" class="phone-input" v-model="userData.code" placeholder="请输入验证码"
+								placeholder-style="color:#B2BDC5;" />
+						</view>
+						<view class="phone-main-left">
+							<view class="login-line"></view>
+							<button type="text" size="mini" :plain="true"
+								style="border: none;padding: 0;height: 17px;line-height: 17px;" @click="getCode"
+								class="phone-num" :disabled="disable"
+								:class="{ codeGeting: isGeting }">{{time}}</button>
 						</view>
 					</view>
 				</uni-forms-item>
 			</uni-forms>
-			<view class="login-button">
-				<image src="../../static/imgs/mine/login/login.png" mode="aspectFill" @click="userLoginPhone">
-				</image>
+			<view class="login-button" @click="userLoginPhone">
+				登录
 			</view>
 		</view>
 	</view>
@@ -49,7 +42,7 @@
 		data() {
 			return {
 				userData: {
-					phoneNumber: "18892893691", // 15129702336
+					phoneNumber: "18892893691", // 15129702336  17781769731
 					code: ""
 				},
 				loginPhoneRules: {
@@ -78,13 +71,15 @@
 		},
 		mounted() {
 			// #ifdef APP-PLUS || H5
-			let a = document.getElementsByClassName('uni-page-head-hd')[0]
-			a.style.display = 'none';
+			// let a = document.getElementsByClassName('uni-page-head-hd')[0];
+			// console.log(a)
+			// a.style.display = 'none';
 			// #endif
 		},
 		methods: {
 			// 获取验证码
 			getCode() {
+				console.log('7777777777')
 				if (this.userData.phoneNumber == '') {
 					uni.showToast({
 						title: '请输入手机号',
@@ -131,6 +126,7 @@
 			},
 			// 手机登录
 			userLoginPhone() {
+				console.log('55555555')
 				this.$refs.loginFormPhone
 					.validate()
 					.then((res) => {
@@ -149,69 +145,44 @@
 								code: this.userData.code
 							},
 							complete: (ret) => {
-								console.log("登录啦",ret);
-								// let msg1={
-								// 			type: "checkin",
-								// 			token: uni.getStorageSync("token")
-								// 		}
-								// uni.connectSocket({
-								// 	url: 'ws://192.168.0.99:8089/chat',
-								// 	success: (res) => {
-								// 		console.log('Socket连接成功')
-								// 		console.log(res)
-								// 	},
-								// 	fail: (res) => {
-								// 		console.log(res)
-								// 	}
-								// });
-								// uni.onSocketOpen(function(res) {
-								// 	console.log('WebSocket连接已打开！', res);
-								// 	uni.sendSocketMessage({
-								// 		data: JSON.stringify(msg1), 
-								// 		success: function() {
-								// 			console.log("checkin数据发送成功" );
-									
-								// 			console.log("checkin数据发送结束，开始接收");
-								// 			uni.onSocketMessage(function(res) {
-								// 				console.log('收到服务器内容：' + res.data);
-								// 			})
-								// 		},
-									   
-								// 		fail: function(res) {
-								// 			console.log("checkin数据发送失败",res)
-								// 		}
-								// 	});
-								// });
+								console.log("登录啦", ret);
+
 								uni.hideLoading();
+								if (this.checkBack(ret, true) == false) {
+									this.$isResolve();
+									return;
+								}
+
+								console.log('212344')
 
 								if (ret.data.code === 200) {
-									let userInfo = {};
-									userInfo.userId = ret.data.data.id;
-									userInfo.userRole = ret.data.data.role;
-									userInfo.userToken = ret.data.data.token;
-									userInfo.userFullName = ret.data.data.fullName;
-									userInfo.userSex = ret.data.data.sex;
-									userInfo.userAge = ret.data.data.age;
-									userInfo.userHeadPic = ret.data.data.headPic;
-									userInfo.phoneNumber = ret.data.data.username;
-
-									getApp().globalData.userInfo = userInfo;
-									uni.setStorageSync('userId', userInfo.userId);
-									uni.setStorageSync("role", userInfo.userRole);
-									uni.setStorageSync("token", userInfo.userToken);
-									uni.setStorageSync("fullName", userInfo.userFullName);
-									uni.setStorageSync("sex", userInfo.userSex);
-									uni.setStorageSync("age", userInfo.userAge);
-									uni.setStorageSync("headPic", userInfo.userHeadPic);
-									uni.setStorageSync("phoneNumber", userInfo.phoneNumber);
-
-									uni.switchTab({
-										url: "../index/personageIndex",
+									uni.setStorageSync("token", ret.data.data.token);
+									this.getUserInfo();
+									this.$isResolve();
+									
+									if (ret.data.data.role == 1) {
+										getApp().globalData.tabBarList.splice(0, 1, {
+											"pagePath": "/pages/index/enterpriseIndex",
+											"text": "人才库",
+											"iconPath": "/static/imgs/tabBar/work.png",
+											"selectedIconPath": "/static/imgs/tabBar/work01.png"
+										});
+										console.log('登录页角色',ret.data.data.role)
+										console.log(getApp().globalData.userInfo.tabBarList)
+									}
+									uni.navigateTo({
+										url: '../index/index'
 									});
-									// uni.switchTab({
-									// 	url: "../index/enterpriseIndex",
-									// });
-								}else{
+									// if (getApp().globalData.userInfo.userRole == 0) {
+									// 	uni.switchTab({
+									// 		url: "../index/personageIndex",
+									// 	});
+									// } else if (getApp().globalData.userInfo.userRole == 1) {
+									// 	uni.switchTab({
+									// 		url: "../index/enterpriseIndex",
+									// 	});
+									// }
+								} else {
 									uni.showToast({
 										title: ret.data.data
 									})
@@ -230,49 +201,53 @@
 <style lang="scss" scoped>
 	.login-container {
 		height: 100vh;
-		padding: 20rpx;
-		background-color: #fbfbfb;
+		padding: 40rpx;
+		padding-top: 160rpx;
+		background-color: #fff;
+
+		.login-title {
+			color: #343A54;
+			font-size: 40rpx;
+			font-weight: bold;
+		}
 
 		.login-main {
+			margin-top: 98rpx;
 
 			.phone-num {
-				color: #000;
+				color: #5EB9F5;
 				font-size: 26rpx;
 			}
 
 			.codeGeting {
-				color: #c3c3c3;
-			}
-
-			.code-code {
-				margin-top: 40rpx;
+				color: #B2BDC5;
 			}
 
 			.phone-main {
 				// height: 40rpx;
-				padding: 20rpx;
-				margin-top: 26rpx;
+				padding: 30rpx;
 				display: flex;
 				align-items: center;
-				background-color: #fff;
+				background-color: #F6FBFF;
 				border-radius: 20rpx;
 
-				.phone-img {
-					width: 30rpx;
-					height: 30rpx;
+				.phone-left {
+					margin-right: 40rpx;
+					font-size: 30rpx;
+					color: #5EB9F5;
 				}
 
 				.login-line {
 					width: 2rpx;
 					height: 40rpx;
-					margin: 0 20rpx;
-					background-color: #c3c3c3;
+					margin-right: 30rpx;
+					background-color: #D0D3DF;
 				}
 
 				.phone-input {
 					flex: 1;
-					font-size: 26rpx;
-					color: #c3c3c3;
+					font-size: 28rpx;
+					color: #B2BDC5;
 				}
 			}
 
@@ -286,28 +261,14 @@
 			}
 
 			.login-button {
-				width: 630rpx;
 				margin: 0 auto;
-				margin-top: 70rpx;
-
-				image {
-					width: 630rpx;
-					height: 125rpx;
-				}
-			}
-
-			.login-bottom {
-				width: fit-content;
-
-				text {
-					font-size: 24rpx;
-					color: #85dbd0;
-				}
-			}
-
-			.register-psw {
-				display: flex;
-				justify-content: space-between;
+				padding: 30rpx 0;
+				margin-top: 108rpx;
+				background: linear-gradient(to top, #5EB7F5, #5EDAF5);
+				border-radius: 20rpx;
+				color: #fff;
+				font-size: 30rpx;
+				text-align: center;
 			}
 		}
 	}

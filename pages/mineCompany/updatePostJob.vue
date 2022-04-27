@@ -211,8 +211,9 @@
 								title: "修改成功",
 								icon: "none",
 								success: () => {
+									uni.$emit('updateJob', '修改成功')
 									uni.navigateBack({
-										delta: 1
+										delta: 1,
 									})
 								}
 							});
@@ -297,11 +298,11 @@
 		.add-project-button {
 			padding: 20rpx;
 			margin-top: 120rpx;
-			background-color: #85dbd0;
-			border-radius: 12rpx;
+			font-size: 30rpx;
 			color: #fff;
-			font-size: 24rpx;
+			background: linear-gradient(to bottom, #5EDAF5, #5EB7F5);
 			text-align: center;
+			border-radius: 45rpx;
 		}
 	}
 </style>

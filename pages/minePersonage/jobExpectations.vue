@@ -6,10 +6,10 @@
 			<text class="one-type">求职类型</text>
 			<view class="one-type-sel">
 				<view class="sel-left" @click="typeSelect('全职')"
-					:style="{backgroundColor: expectationData.type == '全职' ? '#85dbd0' : '#fff',color: expectationData.type == '全职' ? '#fff' : '#85dbd0'}">
+					:style="{backgroundColor: expectationData.type == '全职' ? '#5EB7F5' : '#fff',color: expectationData.type == '全职' ? '#fff' : '#5EB7F5'}">
 					全职</view>
 				<view class="sel-right" @click="typeSelect('兼职')"
-					:style="{backgroundColor: expectationData.type == '兼职' ? '#85dbd0' : '#fff',color: expectationData.type == '兼职' ? '#fff' : '#85dbd0'}">
+					:style="{backgroundColor: expectationData.type == '兼职' ? '#5EB7F5' : '#fff',color: expectationData.type == '兼职' ? '#fff' : '#5EB7F5'}">
 					兼职</view>
 			</view>
 		</view>
@@ -114,7 +114,7 @@
 				.sel-left,
 				.sel-right {
 					padding: 20rpx 40rpx;
-					border: 2rpx solid #85dbd0;
+					border: 2rpx solid #5EB7F5;
 					font-size: 24rpx;
 				}
 
@@ -163,11 +163,11 @@
 			left: 40rpx;
 			right: 40rpx;
 			bottom: 60rpx;
-			background-color: #85dbd0;
-			border-radius: 12rpx;
+			font-size: 30rpx;
 			color: #fff;
-			font-size: 24rpx;
+			background: linear-gradient(to bottom, #5EDAF5, #5EB7F5);
 			text-align: center;
+			border-radius: 45rpx;
 		}
 	}
 </style>

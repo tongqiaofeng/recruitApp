@@ -3,89 +3,116 @@
 		<!-- 企业首页 -->
 		<view class="enterprise-index-top">
 			<view class="top-title">人才库</view>
-			<view class="top-search">
-				<view class="search-left">
-					<navigator url="../search/userSelect" hover-class="none">
-						<view class="left-select">
-							<view class="select-key">{{selectKeyword}}</view>
-							<view class="select-jiao"></view>
-						</view>
-					</navigator>
-					<view class="left-line"></view>
-					<view class="left-input">
-						<input type="text" v-model="keyword" placeholder="请输入姓名/工作地点等"
-							placeholder-style="color: #c3c3c3;font-size: 22rpx;" />
-					</view>
-				</view>
-				<view class="search-right">搜索</view>
-			</view>
 		</view>
-
-		<view class="enterprise-index-main-every" v-for="(item,index) in userList" :key="index">
-			<navigator :url="'./userDetails?userId=' + item.userId" hover-class="none">
-				<view class="every-top">
-					<view class="top-headpic">
-						<image :src="imgUrl + item.headPic" mode="aspectFill"></image>
-					</view>
-					<view class="top-info">
-						<view class="info-name">{{item.fullName}}</view>
-						<view class="info-msg">
-							<text>{{item.workingSeniority}}年</text>
-							<view class="info-line"></view>
-							<text>{{item.formalSchool}}</text>
-							<view class="info-line"></view>
-							<text>{{item.lowestSalary + '-' + item.highestSalary}}{{item.type == '全职' ? 'K' : '元'}}</text>
-							<view class="info-line"></view>
-							<text>{{item.age}}岁</text>
-						</view>
-					</view>
+		<view class="top-search">
+			<view class="search-left">
+				<view class="left-img">
+					<image src="../../static/imgs/common/search.png" mode="aspectFill"></image>
 				</view>
-				<view class="every-company">
-					<view class="company-left">
-						<!-- <image src="" mode=""></image> -->
-						<text>{{item.companyName}}</text>
-						<view class="left-circle"></view>
-						<text>{{item.jobTitle}}</text>
-					</view>
-					<view class="company-right">{{item.startTime + '-' + item.endTime}}</view>
+				<view style="flex: 1;">
+					<input class="left-input" type="text" v-model="keyword" @input="inputChange"
+						placeholder="请输入姓名/工作地点等" placeholder-style="color: #ADBBD1;" />
 				</view>
-				<view class="every-company">
-					<view class="company-left">
-						<!-- <image src="" mode=""></image> -->
-						<text>求职期望：{{item.city}}</text>
-					</view>
-				</view>
-				<view class="every-company">
-					<view class="skill-left">
-						<text>{{item.skill}}</text>
-					</view>
+			</view>
+			<navigator
+				:url="'../search/userSelect?type=' + type + '&formalSchools=' + JSON.stringify(formalSchools) + '&certificateNames=' + JSON.stringify(certificateNames)"
+				hover-class="none">
+				<view class="search-right">
+					<image src="../../static/imgs/common/filter.png" mode="aspectFill"></image>
 				</view>
 			</navigator>
-
 		</view>
+		<view v-if="haveData == 0" class="no-data">
+			<image src="../../static/imgs/common/no.png" mode="aspectFill"></image>
+			<text style="font-size: 30rpx">暂无相关数据~</text>
+		</view>
+		<view v-else style="padding: 0 30rpx;">
+			<view class="enterprise-index-main-every" v-for="(item,index) in userList" :key="index">
+				<navigator :url="'./userDetails?userId=' + item.userId" hover-class="none">
+					<view class="every-top">
+						<view class="top-headpic">
+							<image :src="imgUrl + item.headPic" mode="aspectFill"></image>
+						</view>
+						<view class="top-info">
+							<view class="info-name">{{item.fullName}}</view>
+							<view class="info-msg">
+								<text>{{item.workingSeniority}}年</text>
+								<view class="info-line"></view>
+								<text>{{item.formalSchool}}</text>
+								<view class="info-line"></view>
+								<text>{{item.lowestSalary + '-' + item.highestSalary}}{{item.type == '全职' ? 'K' : '元'}}</text>
+								<view class="info-line"></view>
+								<text>{{item.age}}岁</text>
+							</view>
+						</view>
+					</view>
+					<view class="every-company">
+						<view class="company-name">
+							<text>{{item.companyName}}</text>
+						</view>
+						<view class="company-right">{{item.startTime + '-' + item.endTime}}</view>
+					</view>
+					<view class="every-company">
+						<view class="skill-left">
+							<text>{{item.skill}}</text>
+						</view>
+					</view>
+					<view class="every-hope">
+						<view class="hope">
+							<view class="top">
+								{{item.jobTitle}}
+							</view>
+							<view class="bottom">
+								求职职位
+							</view>
+						</view>
+						<view class="hope">
+							<view class="top">
+								{{item.city}}
+							</view>
+							<view class="bottom">
+								求职期望
+							</view>
+						</view>
+					</view>
+				</navigator>
+			</view>
+		</view>
+		<view class="uni-p-b-98"></view>
+		<!-- <u-tabbar :list="tabbar" :mid-button="false"></u-tabbar> -->
+		<tabBar :pagePath="'/pages/index/enterpriseIndex'"></tabBar>
 	</view>
 </template>
 
 <script>
+	import tabBar from '../../components/tabbar.vue'
 	export default {
+		components: {
+			tabBar
+		},
 		data() {
 			return {
 				imgUrl: this.$baseUrl + '/',
 				haveData: 1,
 				haveMore: 0,
 				page: 1,
-				certificateNames: [],
-				formalSchools: [],
-				type: null,
+				certificateNames: ["不限"],
+				formalSchools: ["不限"],
+				type: "不限",
 				keyword: '',
 				userList: [],
 
-				selectKeyword: '点击选择'
+				selectKeyword: '点击选择',
+				timer: null,
+				tabbar: getApp().globalData.tabBarList
 			}
 		},
+		onShow() {
+			this.chat_updateReddot();
+		},
 		onLoad() {
+			uni.hideTabBar()
 			this.getUserList();
-
 			uni.$on('userSelectData', (option) => {
 				console.log(option);
 				this.type = option.type;
@@ -118,6 +145,13 @@
 			}
 		},
 		methods: {
+			inputChange() {
+				clearTimeout(this.timer) // 清除以前触发的定时器，相当于清除以前的输入框内容（1  11  111等）
+				this.timer = setTimeout(() => {
+					this.userList = [];
+					this.getUserList();
+				}, 500)
+			},
 			// 获取人才列表
 			getUserList() {
 				uni.request({
@@ -159,86 +193,80 @@
 <style lang="scss" scoped>
 	.enterprise-index-container {
 		min-height: 100vh;
-		padding-bottom: 60rpx;
-		background-color: #f9f9f9;
+		background-color: #f3f7fa;
 
 		.enterprise-index-top {
-			padding: 40rpx;
-			background-color: #85dbd0;
+			height: 259rpx;
+			padding: 0 30rpx 0;
+			background-image: url(../../static/imgs/index/index_bg.png);
+			background-size: 100% 100%;
 
 			.top-title {
-				font-size: 38rpx;
+				padding-top: 129rpx;
+				font-size: 44rpx;
 				color: #fff;
+				font-weight: bold;
+				text-align: left;
 			}
+		}
 
-			.top-search {
-				margin-top: 20rpx;
+		.top-search {
+			margin-top: -37.5rpx;
+			margin-bottom: 40rpx;
+			padding: 0 30rpx;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.search-left {
+				height: 75rpx;
 				display: flex;
-				justify-content: space-between;
 				align-items: center;
+				padding: 0 31rpx;
+				margin-right: 29rpx;
+				background-color: #fff;
+				border-radius: 18.75px;
+				flex: 1;
+				box-shadow: 0 12rpx 12rpx -4rpx rgba(94, 183, 245, 0.11);
 
-				.search-left {
-					padding: 4rpx;
-					display: flex;
-					flex: 1;
-					align-items: center;
-					background-color: #fff;
-					border-radius: 60rpx;
+				.left-img {
+					margin-right: 20rpx;
 
-					.left-select {
-						width: 160rpx;
-						padding: 10rpx 30rpx;
-						display: flex;
-						align-items: center;
-						justify-content: space-between;
-						color: #85dbd0;
-						background-color: #f1f1f1;
-						border-radius: 60rpx;
-						font-size: 24rpx;
-
-						.select-key {
-							max-height: 32rpx;
-							flex: 1;
-							overflow: hidden;
-							text-overflow: ellipsis;
-							display: -webkit-box;
-							-webkit-line-clamp: 1;
-							-webkit-box-orient: vertical;
-						}
-
-						.select-jiao {
-							width: 0;
-							height: 0;
-							border-width: 10rpx 10rpx 0;
-							border-style: solid;
-							border-color: #85dbd0 transparent transparent;
-						}
-					}
-
-					.left-line {
-						width: 2rpx;
-						height: 22rpx;
-						margin: 0 10rpx;
-						background-color: #c3c3c3;
-					}
-
-					.left-input {
-						font-size: 24rpx;
+					image {
+						width: 24rpx;
+						height: 24rpx;
 					}
 				}
 
-				.search-right {
-					margin-left: 30rpx;
-					color: #fff;
-					font-size: 28rpx;
+				.left-input {
+					font-size: 24rpx;
+					color: #ADBBD1;
+				}
+			}
+
+			.search-right {
+				width: 75rpx;
+				height: 75rpx;
+				background-color: #fff;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				box-shadow: 0 12rpx 12rpx -4rpx rgba(94, 183, 245, 0.11);
+
+				image {
+					width: 27rpx;
+					height: 30rpx;
 				}
 			}
 		}
 
 		.enterprise-index-main-every {
-			padding: 20rpx 40rpx;
-			margin-top: 20rpx;
+			padding: 28rpx 30rpx;
+			margin-bottom: 20rpx;
 			background-color: #fff;
+			border-radius: 20rpx;
+			box-shadow: 0 6rpx 6rpx -3rpx rgba(147, 169, 182, 0.11);
 
 			.every-top {
 				display: flex;
@@ -247,66 +275,59 @@
 				.top-headpic {
 
 					image {
-						width: 100rpx;
-						height: 100rpx;
+						width: 76rpx;
+						height: 76rpx;
 						border-radius: 50%;
 					}
 				}
 
 				.top-info {
-					height: 100rpx;
+					height: 76rpx;
 					margin-left: 20rpx;
 					display: flex;
 					flex-direction: column;
 					justify-content: space-around;
 
 					.info-name {
-						font-size: 32rpx;
+						font-size: 30rpx;
+						font-weight: bold;
 					}
 
 					.info-msg {
 						display: flex;
 						align-items: center;
-						color: #c3c3c3;
-						font-size: 22rpx;
+						color: #A3B3CC;
+						font-size: 24rpx;
 
 						.info-line {
 							width: 4rpx;
 							height: 20rpx;
 							margin: 0 10rpx;
-							background-color: #c3c3c3;
+							background-color: #A3B3CC;
 						}
 					}
 				}
 			}
 
 			.every-company {
-				margin-top: 20rpx;
+				margin-top: 27rpx;
 				display: flex;
 				justify-content: space-between;
 
-				.company-left {
-					display: flex;
-					align-items: center;
-					font-size: 24rpx;
-
-					.left-circle {
-						width: 4rpx;
-						height: 4rpx;
-						margin: 0 10rpx;
-						background-color: #000;
-						border-radius: 50%;
-					}
+				.company-name {
+					color: #061D4C;
+					font-size: 26rpx;
+					font-weight: bold;
 				}
 
 				.company-right {
-					color: #808080;
-					font-size: 24rpx;
+					color: #A3B3CC;
+					font-size: 20rpx;
 				}
 
 				.skill-left {
-					font-size: 24rpx;
-					color: #c3c3c3;
+					font-size: 20rpx;
+					color: #A3B3CC;
 					overflow: hidden;
 					text-overflow: ellipsis;
 					display: -webkit-box;
@@ -315,6 +336,30 @@
 				}
 			}
 
+			.every-hope {
+				margin-top: 27rpx;
+				padding: 31rpx;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				background-color: #F7F9FA;
+				border-radius: 20rpx;
+
+				.hope {
+
+					.top {
+						font-weight: bold;
+						font-size: 26rpx;
+						color: #061D4C;
+					}
+
+					.bottom {
+						margin-top: 23rpx;
+						font-size: 20rpx;
+						color: #A3B3CC;
+					}
+				}
+			}
 		}
 	}
 </style>

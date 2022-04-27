@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/index/personageIndex",
     "pages/index/enterpriseIndex",
     "pages/index/userDetails",
@@ -8,11 +9,10 @@
     "pages/search/jobScreen",
     "pages/search/userSelect",
     "pages/message/message",
-    "pages/examine/examine",
-    "pages/managelist/managelist",
-    "pages/managelist/listitem",
+    "pages/message/chat",
+    "pages/message/moreOperations",
+    "pages/message/allNotifications",
     "pages/mine/mine",
-    "pages/mine/adminstar",
     "pages/mine/userMsg",
     "pages/mine/accountType",
     "pages/mine/personMsg",
@@ -43,12 +43,22 @@
     "pages/mine/login",
     "pages/chat/chat/chat"
   ],
-  "subPackages": [],
+  "subPackages": [
+    {
+      "root": "systemAdmin",
+      "pages": [
+        "systemMsgAdmin",
+        "examine",
+        "managelist",
+        "listitem"
+      ]
+    }
+  ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "",
-    "navigationBarBackgroundColor": "#85dbd0",
-    "backgroundColor": "#f9f9f9"
+    "navigationBarBackgroundColor": "#5EB7F5",
+    "backgroundColor": "#5EB7F5"
   },
   "tabBar": {
     "color": "#c3c3c3",
@@ -57,16 +67,22 @@
     "borderStyle": "black",
     "list": [
       {
+        "pagePath": "pages/index/enterpriseIndex",
+        "text": "人才库",
+        "iconPath": "static/imgs/tabBar/work.png",
+        "selectedIconPath": "static/imgs/tabBar/work01.png"
+      },
+      {
         "pagePath": "pages/index/personageIndex",
         "text": "找工作",
-        "iconPath": "static/imgs/tabBar/index.png",
-        "selectedIconPath": "static/imgs/tabBar/index01.png"
+        "iconPath": "static/imgs/tabBar/work.png",
+        "selectedIconPath": "static/imgs/tabBar/work01.png"
       },
       {
         "pagePath": "pages/message/message",
         "text": "消息",
-        "iconPath": "static/imgs/tabBar/mine.png",
-        "selectedIconPath": "static/imgs/tabBar/mine01.png"
+        "iconPath": "static/imgs/tabBar/msg.png",
+        "selectedIconPath": "static/imgs/tabBar/msg01.png"
       },
       {
         "pagePath": "pages/mine/mine",
@@ -76,6 +92,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

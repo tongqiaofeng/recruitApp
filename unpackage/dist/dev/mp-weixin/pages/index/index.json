@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#85dbd0",
+  "enablePullDownRefresh": true,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "tab-bar": "/components/tabbar"
+  }
+}

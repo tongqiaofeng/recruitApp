@@ -35,21 +35,23 @@
 				</view>
 			</view>
 			<view class="line"></view>
-			<view class="main-people">
-				<view class="people-left">
-					<image class="headpic" v-if="jobDetails.issuerHeadPic"
-						:src="imgUrl + '/' + jobDetails.issuerHeadPic" mode="aspectFill"></image>
-					<view class="msg">
-						<view class="name">
-							{{jobDetails.issuerFullName}}
-						</view>
-						<view class="company">
-							{{jobDetails.companyName}}
+			<navigator :url="'../message/chat?id=' + jobDetails.userId + '&name=' + jobDetails.issuerFullName + '&headPic=' + jobDetails.issuerHeadPic" hover-class="none">
+				<view class="main-people">
+					<view class="people-left">
+						<image class="headpic" v-if="jobDetails.issuerHeadPic"
+							:src="imgUrl + '/' + jobDetails.issuerHeadPic" mode="aspectFill"></image>
+						<view class="msg">
+							<view class="name">
+								{{jobDetails.issuerFullName}}
+							</view>
+							<view class="company">
+								{{jobDetails.companyName}}
+							</view>
 						</view>
 					</view>
+					<image class="right" src="../../static/imgs/common/right.png" mode="aspectFill"></image>
 				</view>
-				<image class="right" src="../../static/imgs/common/right.png" mode="aspectFill"></image>
-			</view>
+			</navigator>
 			<view class="line"></view>
 			<view class="main-container">
 				<view class="title">
@@ -87,8 +89,8 @@
 		data() {
 			return {
 				imgUrl: this.$baseUrl,
-				collect: require("../../static/imgs/common/collect.png"),
-				collect1: require("../../static/imgs/common/collect01.png"),
+				collect: require("../../static/imgs/index/not.png"),
+				collect1: require("../../static/imgs/index/yes.png"),
 				detailsId: null,
 				jobDetails: {},
 				keywordList: [],
@@ -178,19 +180,28 @@
 			.top-left {
 				display: flex;
 				align-items: center;
-				font-size: 28rpx;
-
+				font-size: 30rpx;
+				color: #061D4C;
+				
 				.top-left-img {
 					width: 17rpx;
 					height: 30rpx;
-					margin-right: 20rpx;
+					margin-right: 30rpx;
 				}
 			}
 
 			.top-right {
-				image {
-					width: 40rpx;
-					height: 38rpx;
+				width: 80rpx;
+				height: 80rpx;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background: linear-gradient(to bottom, #5EDAF5, #5EB7F5);
+				border-radius: 50%;
+				
+				.index-img {
+					width: 48rpx;
+					height: 46rpx;
 				}
 			}
 		}

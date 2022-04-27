@@ -5,53 +5,58 @@
 			<view class="top-left">
 				<image @click="goList" class="top-left-img" src="../../static/imgs/common/back.png" mode="aspectFill">
 				</image>
-				<text>{{myMsgData.name}}</text>
+				<text>{{ myMsgData.name }}</text>
 			</view>
 			<view class="top-right">
-				<image class="index-img" :src="myMsgData.isCollect == 0 ? collect : collect1" mode="aspectFill"
+				<image class="index-img" :src="resumeData.isCollect == 0 ? collect : collect1" mode="aspectFill"
 					@click="isFavorite">
 				</image>
 			</view>
 		</view>
-		<view class="resume-main-one" :style="{'padding-top': topConHeight+'px'}">
-			<view class="one-left">
-				<view class="left-top">
-					<text class="name">{{ myMsgData.name }}</text>
+		<view class="top-line" :style="{ 'padding-top': topConHeight + 'px' }"></view>
+		<navigator
+			:url="'../message/chat?id=' + myMsgData.userId + '&name=' + myMsgData.name + '&headPic=' + myMsgData.headPic"
+			hover-class="none">
+			<view class="resume-main-one">
+				<view class="one-left">
+					<view class="left-top">
+						<text class="name">{{ myMsgData.name }}</text>
+					</view>
+					<text class="left-bottom">
+						{{ myMsgData.joinWorkTime }}年经验
+						<text v-show="myMsgData.age">-{{ myMsgData.age }}岁</text>
+					</text>
 				</view>
-				<text class="left-bottom">{{ myMsgData.joinWorkTime }}年经验-{{ myMsgData.age }}岁</text>
+				<view class="one-right">
+					<image v-if="myMsgData.headPic" :src="imgUrl + '/' + myMsgData.headPic" mode="aspectFill"></image>
+				</view>
 			</view>
-			<view class="one-right">
-				<image v-if="myMsgData.headPic" :src="imgUrl + '/' + myMsgData.headPic" mode="aspectFill"></image>
-			</view>
-		</view>
+		</navigator>
 		<view class="resume-main-every">
 			<view class="every-title">
 				<text>个人优势</text>
 			</view>
 			<view class="every-main">
-				<text>{{
-            resumeData.skill == "" ? "输入个人优势" : resumeData.skill
-          }}</text>
+				<text>{{resumeData.skill}}</text>
 			</view>
 		</view>
 		<view class="resume-main-every">
 			<view class="every-title">
 				<text>求职期望</text>
 			</view>
-			<view v-if="
-            resumeData.jobWanted == null || resumeData.jobWanted == undefined
-          " class="every-main">添加求职期望</view>
+			<view v-if="resumeData.jobWanted == null || resumeData.jobWanted == undefined" class="every-main">添加求职期望
+			</view>
 			<view v-else class="every-main">
 				<text>{{ resumeData.jobWanted.type }}</text>
 				<text>{{ " " + resumeData.jobWanted.city + " " }}</text>
 				<text v-if="
-              resumeData.jobWanted.lowestSalary != '' &&
-              resumeData.jobWanted.lowestSalary != null
-            ">{{
-              resumeData.jobWanted.lowestSalary +
-              "~" +
-              resumeData.jobWanted.highestSalary
-            }}{{ resumeData.jobWanted.type == "全职" ? "K" : "元" }}</text>
+            resumeData.jobWanted.lowestSalary != '' &&
+            resumeData.jobWanted.lowestSalary != null
+          ">{{
+            resumeData.jobWanted.lowestSalary +
+            "~" +
+            resumeData.jobWanted.highestSalary
+          }}{{ resumeData.jobWanted.type == "全职" ? "K" : "元" }}</text>
 			</view>
 		</view>
 		<view class="resume-main-every">
@@ -63,7 +68,7 @@
 				<view class="list-one">
 					<text class="list-one-left">{{ item.companyName }}</text>
 					<view class="list-one-right">
-						<text>{{ item.startTime + "至" + item.endTime }}</text>
+						<text>{{ formatTime(item.startTime) + " - " + formatTime(item.endTime) }}</text>
 					</view>
 				</view>
 				<view class="list-two">{{ item.jobTitle }}</view>
@@ -82,7 +87,7 @@
 				<view class="list-one">
 					<text class="list-one-left">{{ item.projectName }}</text>
 					<view class="list-one-right">
-						<text>{{ item.startTime + "至" + item.endTime }}</text>
+						<text>{{ formatTime(item.startTime) + " - " + formatTime(item.endTime )}}</text>
 					</view>
 				</view>
 				<view class="list-two">{{ item.role }}</view>
@@ -105,11 +110,11 @@
 				<view class="list-one">
 					<text class="list-one-left">{{ item.schoolName }}</text>
 					<view class="list-one-right">
-						<text>{{ item.startTime + "至" + item.endTime }}</text>
+						<text>{{ formatTime(item.startTime ) + " - " + formatTime(item.endTime) }}</text>
 					</view>
 				</view>
 				<view class="list-two">{{ item.formalSchool
-            }}<text style="margin-left: 10rpx">{{ item.major }}</text>
+          }}<text style="margin-left: 10rpx">{{ item.major }}</text>
 				</view>
 				<view class="list-three" v-if="item.achievement">
 					<view class="three-title">在校经历：</view>
@@ -126,10 +131,10 @@
 				<view class="every-main" v-for="(item, index) in resumeData.certificateMsg" :key="index">
 					<view class="list-one">
 						<text class="list-one-left" style="
-                  margin-right: 20rpx;
-                  padding: 10rpx 40rpx;
-                  background-color: #f9f9f9;
-                ">{{ item.certificateName }}</text>
+                margin-right: 20rpx;
+                padding: 10rpx 30rpx;
+                background-color: #EFF6FF;
+              ">{{ item.certificateName }}</text>
 					</view>
 				</view>
 			</view>
@@ -142,8 +147,8 @@
 		data() {
 			return {
 				imgUrl: this.$baseUrl,
-				collect: require("../../static/imgs/common/collect.png"),
-				collect1: require("../../static/imgs/common/collect01.png"),
+				collect: require("../../static/imgs/index/not.png"),
+				collect1: require("../../static/imgs/index/yes.png"),
 				myMsgData: {
 					headPic: "",
 					name: "",
@@ -159,74 +164,89 @@
 					certificateMsg: [],
 				},
 				detailsId: null,
-				topConHeight: null
+				topConHeight: null,
 			};
 		},
 		onLoad(option) {
+			console.log(option)
 			this.detailsId = option.userId;
 			this.getUserMsg();
 		},
 		mounted() {
 			const query = uni.createSelectorQuery().in(this);
-			query.select('#user-details-top').boundingClientRect(data => {
-				console.log(data);
-				this.topConHeight = data.height;
-			}).exec();
+			query
+				.select("#user-details-top")
+				.boundingClientRect((data) => {
+					console.log(data);
+					this.topConHeight = data.height;
+				})
+				.exec();
 		},
 		methods: {
-			// 收藏/取消收藏职位
+			// 收藏/取消收藏个人
 			isFavorite() {
 				let list = [];
 				list.push(this.detailsId);
 				uni.request({
-					url: this.$baseUrl + '/favoritePersonSave',
-					method: 'POST',
+					url: this.$baseUrl + "/favoritePersonSave",
+					method: "POST",
 					data: {
-						userIdList: list
+						userIdList: list,
 					},
 					header: {
 						"content-type": "application/json",
 						token: uni.getStorageSync("token"),
 					},
 					complete: (res) => {
-						console.log('收藏/取消收藏');
+						console.log("收藏/取消收藏");
 						console.log(res);
 
 						if (this.checkBack(res, true) == false) return;
 						else {
+							if (this.resumeData.isCollect == 0) {
+								uni.showToast({
+									title: '已收藏',
+									icon: 'none'
+								})
+							} else {
+								uni.showToast({
+									title: '已取消收藏',
+									icon: 'none'
+								})
+							};
 							this.getUserMsg();
 						}
-					}
-				})
+					},
+				});
 			},
 			// 根据身份证号计算年龄
 			idNumChange() {
-				let idNumber = this.resumeData.birthday.split('-');
-				let myDate = new Date();
-				let month = myDate.getMonth() + 1;
-				let day = myDate.getDate();
-				let age = myDate.getFullYear() - idNumber[0] - 1;
-				if (
-					idNumber[1] < month ||
-					(idNumber[1] == month &&
-						idNumber[2] <= day)
-				) {
-					age++;
+				if (this.resumeData.birthday) {
+					let idNumber = this.resumeData.birthday.split("-");
+					let myDate = new Date();
+					let month = myDate.getMonth() + 1;
+					let day = myDate.getDate();
+					let age = myDate.getFullYear() - idNumber[0] - 1;
+					if (idNumber[1] < month || (idNumber[1] == month && idNumber[2] <= day)) {
+						age++;
+					}
+					this.myMsgData.age = age;
+				} else {
+					this.myMsgData.age = '';
 				}
-				this.myMsgData.age = age;
 			},
 
 			// 获取简历信息
 			getUserMsg() {
 				uni.request({
 					url: this.$baseUrl + "/userMsgInfo",
-					method: 'POST',
+					method: "POST",
 					header: {
 						"content-type": "application/json",
 						token: uni.getStorageSync("token"),
 					},
 					data: {
-						userId: this.detailsId
+						userId: this.detailsId,
 					},
 					complete: (res) => {
 						console.log("用户信息");
@@ -256,8 +276,8 @@
 			// 返回列表页
 			goList() {
 				uni.navigateBack({
-					delta: 1
-				})
+					delta: 1,
+				});
 			},
 		},
 	};
@@ -265,8 +285,8 @@
 
 <style lang="scss" scoped>
 	.resume-container {
-		padding: 0 40rpx;
-		padding-bottom: 60rpx;
+		padding: 10rpx 0 36rpx;
+		background-color: #fff;
 
 		.container-top {
 			padding: 40rpx;
@@ -282,81 +302,94 @@
 			.top-left {
 				display: flex;
 				align-items: center;
-				font-size: 28rpx;
+				font-size: 30rpx;
+				color: #061D4C;
 
 				.top-left-img {
 					width: 17rpx;
 					height: 30rpx;
-					margin-right: 20rpx;
+					margin-right: 30rpx;
 				}
 			}
 
 			.top-right {
-				image {
-					width: 40rpx;
-					height: 38rpx;
+				width: 80rpx;
+				height: 80rpx;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background: linear-gradient(to bottom, #5EDAF5, #5EB7F5);
+				border-radius: 50%;
+
+				.index-img {
+					width: 48rpx;
+					height: 46rpx;
 				}
 			}
 		}
-
 
 		.update-img {
 			width: 32rpx;
 			height: 32rpx;
 		}
 
+		.top-line {
+			width: 100vw;
+			// height: 10rpx;
+			background-color: #EFF6FF;
+		}
+
 		.resume-main-one {
-			padding: 40rpx 0;
+			padding: 30rpx 0;
+			margin: 0 40rpx;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			border-bottom: 4rpx solid #f9f9f9;
+			// border-top: 10rpx solid #EFF6FF;
+			border-bottom: 2rpx solid #EFF6FF;
 
 			.one-left {
 				.left-top {
-					display: flex;
-					align-items: center;
-					font-size: 32rpx;
+					margin-bottom: 10rpx;
 					font-weight: bold;
-
-					.name {
-						margin-right: 10rpx;
-						letter-spacing: 4rpx;
-					}
+					color: #061D4C;
+					font-size: 38rpx;
+					letter-spacing: 4rpx;
 				}
 
 				.left-bottom {
-					margin-top: 20rpx;
-					font-size: 22rpx;
-					color: #808080;
+					font-size: 26rpx;
+					color: #506383;
 				}
 			}
 
 			.one-right {
 				image {
-					width: 100rpx;
-					height: 100rpx;
+					width: 120rpx;
+					height: 120rpx;
 					border-radius: 50%;
 				}
 			}
 		}
 
 		.resume-main-every {
-			padding: 40rpx 0;
-			border-bottom: 4rpx solid #f9f9f9;
+			padding: 50rpx 0;
+			margin: 0 40rpx;
+			border-bottom: 2rpx solid #f9f9f9;
 
 			.every-title {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				font-size: 28rpx;
+				font-size: 30rpx;
 				font-weight: bold;
+				color: #061D4C;
 			}
 
 			.every-main {
-				margin-top: 40rpx;
-				font-size: 24rpx;
-				color: #808080;
+				margin-top: 50rpx;
+				font-size: 28rpx;
+				color: #506383;
 				text-align: left;
 
 				.list-one {
@@ -365,8 +398,9 @@
 					align-items: center;
 
 					.list-one-left {
-						font-size: 24rpx;
-						color: #000;
+						font-size: 28rpx;
+						color: #061D4C;
+						font-weight: bold;
 					}
 
 					.list-one-right {
@@ -375,42 +409,27 @@
 
 						text {
 							margin-right: 20rpx;
-							font-size: 22rpx;
-							color: #c3c3c3;
+							font-size: 26rpx;
+							color: #506383;
 						}
 					}
 				}
 
 				.list-two {
-					margin-top: 20rpx;
-					color: #c3c3c3;
+					margin-top: 9rpx;
+					color: #506383;
+					font-size: 26rpx;
 				}
 
 				.list-three {
-					.three-title {
-						padding: 40rpx 0 20rpx;
-					}
+					font-size: 26rpx;
+					color: #506383;
 
-					// .three-main {
-					// 	max-height: 80rpx;
-					// 	overflow: hidden;
-					// 	text-overflow: ellipsis;
-					// 	display: -webkit-box;
-					// 	-webkit-line-clamp: 2;
-					// 	-webkit-box-orient: vertical;
-					// }
+					.three-title {
+						padding: 37rpx 0 10rpx;
+					}
 				}
 			}
-		}
-
-		.resume-button {
-			padding: 20rpx;
-			margin-top: 80rpx;
-			background-color: #85dbd0;
-			border-radius: 12rpx;
-			color: #fff;
-			font-size: 24rpx;
-			text-align: center;
 		}
 	}
 </style>

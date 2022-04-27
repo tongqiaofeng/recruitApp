@@ -25,135 +25,48 @@
 /* 透明度 */
 /* 文章场景相关 */
 .admin-post-job-container.data-v-01d387ec {
-  background-color: #fff;
+  min-height: 100vh;
+  padding: 0 30rpx;
+  background-color: #f6f9ff;
 }
-.admin-post-job-container .admin-post-job-top.data-v-01d387ec {
-  height: 100rpx;
-  padding: 0 40rpx;
+.admin-post-job-container .admin-post-job-header.data-v-01d387ec {
+  padding-top: 90rpx;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+}
+.admin-post-job-container .admin-post-job-header .header-left.data-v-01d387ec {
+  width: 17rpx;
+  height: 30rpx;
+}
+.admin-post-job-container .admin-post-job-header .header-title.data-v-01d387ec {
+  font-size: 30rpx;
+  color: #061D4C;
+  font-weight: bold;
+}
+.admin-post-job-container .admin-post-job-header .header-right.data-v-01d387ec {
+  width: 27rpx;
+  height: 30rpx;
+}
+.admin-post-job-container .admin-post-job-add.data-v-01d387ec {
   position: fixed;
-  top: 0px;
-  left: 0;
-  right: 0;
-  background-color: #fff;
+  bottom: 92rpx;
+  right: 43rpx;
   z-index: 1;
 }
-.admin-post-job-container .admin-post-job-top .add-job.data-v-01d387ec {
-  width: 100rpx;
-  padding: 10rpx 30rpx;
-  background-color: #85dbd0;
-  color: #fff;
-  font-size: 24rpx;
-  border-radius: 10rpx;
-  text-align: center;
+.admin-post-job-container .admin-post-job-add .add-img.data-v-01d387ec {
+  width: 110rpx;
+  height: 110rpx;
 }
-.admin-post-job-container .popup-container.data-v-01d387ec {
-  min-height: 300rpx;
-  padding: 40rpx;
-  background-color: #fff;
-}
-.admin-post-job-container .admin-post-job-main.data-v-01d387ec {
-  margin-top: 80rpx;
-  padding: 0 40rpx;
-}
-.admin-post-job-container .admin-post-job-main .main-every.data-v-01d387ec {
-  margin-bottom: 20rpx;
-  position: relative;
-}
-.admin-post-job-container .admin-post-job-main .title.data-v-01d387ec {
-  height: 80rpx;
-  padding: 0 40rpx;
-  position: fixed;
-  top: 0px80;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.admin-post-job-container .title.data-v-01d387ec {
+  margin-top: 49rpx;
   font-size: 22rpx;
-  background-color: #fff;
-  z-index: 1;
+  color: #A3B3CC;
 }
-.admin-post-job-container .admin-post-job-main .commoditybox.data-v-01d387ec {
-  margin-bottom: 60rpx;
-  display: flex;
-  align-items: center;
-  position: relative;
-  box-shadow: -1px 5px 10px 2px #f6f6f7;
-  border-radius: 30rpx;
-}
-.admin-post-job-container .admin-post-job-main .commoditybox .box-check.data-v-01d387ec {
-  margin-left: 10rpx;
-}
-.admin-post-job-container .admin-post-job-main .commoditybox .box-left.data-v-01d387ec {
-  width: 180rpx;
-  height: 174rpx;
-  padding: 20rpx 0 20rpx 20rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.admin-post-job-container .admin-post-job-main .commoditybox .box-left image.data-v-01d387ec {
-  width: 100%;
-  height: 100%;
-  border-radius: 30rpx;
-}
-.admin-post-job-container .admin-post-job-main .commoditybox .box-right.data-v-01d387ec {
-  padding: 25rpx 20rpx 30rpx 40rpx;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.admin-post-job-container .admin-post-job-main .commoditybox .box-right .name.data-v-01d387ec {
-  margin-bottom: 20rpx;
-  font-size: 24rpx;
-}
-.admin-post-job-container .admin-post-job-main .commoditybox .box-right .price.data-v-01d387ec {
-  font-size: 26rpx;
-  color: #ff8b62;
-}
-.admin-post-job-container .admin-post-job-main .commoditybox .closeicon.data-v-01d387ec {
-  position: absolute;
-  right: 20rpx;
-  bottom: 20rpx;
-  color: #ef5b5b;
-  font-size: 28rpx;
-}
-.admin-post-job-container .admin-post-job-main .commoditybox .closeicon image.data-v-01d387ec {
-  width: 124rpx;
-  height: 103rpx;
-}
-.admin-post-job-container .admin-post-job-main .commoditybox .delIcon.data-v-01d387ec {
-  position: absolute;
-  top: 20rpx;
-  right: -20rpx;
-  color: #ef5b5b;
-  font-size: 28rpx;
-}
-.admin-post-job-container .admin-post-job-main .commoditybox .delIcon image.data-v-01d387ec {
-  width: 40rpx;
-  height: 40rpx;
-}
-.admin-post-job-container .admin-post-job-main .bottom.data-v-01d387ec {
-  padding-bottom: 140rpx;
+.admin-post-job-container .bottom.data-v-01d387ec {
+  padding-bottom: 40rpx;
   font-size: 24rpx;
   color: #e3e3e3;
   text-align: center;
   font-size: 30rpx;
-}
-.admin-post-job-container .admin-post-job-main .allCheck.data-v-01d387ec {
-  height: 100rpx;
-  padding: 0 40rpx;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f9f9f9;
-  font-size: 28rpx;
 }
 

@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "人才详细信息",
   "enablePullDownRefresh": true,
+  "navigationStyle": "custom",
   "usingComponents": {}
 }

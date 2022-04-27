@@ -3,282 +3,332 @@
 		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
 	},
 	"pages": [{
-		"path": "pages/index/personageIndex",
-		"style": {
-			"navigationBarTitleText": "找工作",
-			"navigationBarTextStyle": "white",
-			"navigationBarBackgroundColor": "#85dbd0",
-			"enablePullDownRefresh": true,
-			"navigationStyle": "custom",
-			"app-plus": {
-				"titleView": false
-			}
-		}
-	}, {
-		"path": "pages/index/enterpriseIndex",
-		"style": {
-			"navigationBarTitleText": "人才库",
-			"navigationBarTextStyle": "white",
-			"navigationBarBackgroundColor": "#85dbd0",
-			"enablePullDownRefresh": true,
-			"navigationStyle": "custom",
-			"app-plus": {
-				"titleView": false
-			}
-		}
-	}, {
-		"path": "pages/index/userDetails",
-		"style": {
-			"navigationBarTitleText": "人才详细信息",
-			"enablePullDownRefresh": true,
-			"navigationStyle": "custom"
-		}
-	}, {
-		"path": "pages/index/jobDetails",
-		"style": {
-			"navigationBarTitleText": "职位详细信息",
-			"enablePullDownRefresh": true,
-			"navigationStyle": "custom"
-		}
-	}, {
-		"path": "pages/search/jobSearch",
-		"style": {
-			"navigationBarTitleText": "职位搜索",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/search/jobScreen",
-		"style": {
-			"navigationBarTitleText": "职位筛选",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/search/userSelect",
-		"style": {
-			"navigationBarTitleText": "人才筛选",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/message/message",
-		"style": {
-			"navigationBarTitleText": "消息"
-		}
-	}, {
-		"path": "pages/examine/examine",
-		"style": {
-			"enablePullDownRefresh": true
-		}
-	}, {
-		"path": "pages/managelist/managelist",
-		"style": {
-			"navigationStyle": "custom"
-			// navigationStyle:custom
-		}
-	}, {
-		"path": "pages/managelist/listitem"
-	}, {
-		"path": "pages/mine/mine",
-		"style": {
-			"navigationBarTitleText": "我的"
-		}
-	}, {
-		"path": "pages/mine/adminstar",
-		"style": {
-			"navigationBarTitleText": "我的"
-		}
-	}, {
-		"path": "pages/mine/userMsg",
-		"style": {
-			"navigationBarTitleText": "个人信息",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/mine/accountType",
-		"style": {
-			"navigationBarTitleText": "选择认证类型",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/mine/personMsg",
-		"style": {
-			"navigationBarTitleText": "个人认证",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/minePersonage/resume",
-		"style": {
-			"navigationBarTitleText": "我的在线简历",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/minePersonage/jobCollect",
-		"style": {
-			"navigationBarTitleText": "职位收藏",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/mineCompany/personCollect",
-		"style": {
-			"navigationBarTitleText": "人才收藏",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/minePersonage/skill",
-		"style": {
-			"navigationBarTitleText": "",
-			"navigationBarBackgroundColor": "#fff",
-			"navigationStyle": "custom"
-			// "app-plus": {
-			// 	"titleView": {
-			// 		"buttons": [{
-			// 			"text": "确定"
-			// 		}]
-			// 	}
-			// }
-		}
-	}, {
-		"path": "pages/minePersonage/jobExpectations",
-		"style": {
-			"navigationBarTitleText": "求职期望",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/minePersonage/addWorkHistory",
-		"style": {
-			"navigationBarTitleText": "添加工作经历",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/minePersonage/updateWorkHistory",
-		"style": {
-			"navigationBarTitleText": "编辑工作经历",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/minePersonage/jobContext",
-		"style": {
-			"navigationBarTitleText": "工作内容",
-			"navigationBarBackgroundColor": "#fff",
-			"navigationStyle": "custom"
-		}
-	}, {
-		"path": "pages/minePersonage/addProjectHistory",
-		"style": {
-			"navigationBarTitleText": "添加项目经历",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/minePersonage/updateProjectHistory",
-		"style": {
-			"navigationBarTitleText": "编辑项目经历",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/minePersonage/descriptionContext",
-		"style": {
-			"navigationBarTitleText": "项目描述",
-			"navigationBarBackgroundColor": "#fff",
-			"navigationStyle": "custom"
-		}
-	}, {
-		"path": "pages/minePersonage/achievementContext",
-		"style": {
-			"navigationBarTitleText": "项目业绩",
-			"navigationBarBackgroundColor": "#fff",
-			"navigationStyle": "custom"
-		}
-	}, {
-		"path": "pages/minePersonage/addEduHistory",
-		"style": {
-			"navigationBarTitleText": "添加教育经历",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/minePersonage/updateEduHistory",
-		"style": {
-			"navigationBarTitleText": "编辑教育经历",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/minePersonage/experienceInSchoolContext",
-		"style": {
-			"navigationBarTitleText": "在校经历",
-			"navigationBarBackgroundColor": "#fff",
-			"navigationStyle": "custom"
-		}
-	}, {
-		"path": "pages/minePersonage/addCertificate",
-		"style": {
-			"navigationBarTitleText": "添加资格证书",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/minePersonage/updateCertificate",
-		"style": {
-			"navigationBarTitleText": "编辑资格证书",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/common/city",
-		"style": {
-			"navigationBarTitleText": "选择城市",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/mine/companyMsg",
-		"style": {
-			"navigationBarTitleText": "企业认证",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/mineCompany/adminPostJob",
-		"style": {
-			"navigationBarTitleText": "职位管理",
-			"navigationBarBackgroundColor": "#fff",
-			"enablePullDownRefresh": true,
-			"app-plus": {
-				"titleView": false
-			}
-		}
-	}, {
-		"path": "pages/mineCompany/addPostJob",
-		"style": {
-			"navigationBarTitleText": "发布职位",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/mineCompany/updatePostJob",
-		"style": {
-			"navigationBarTitleText": "编辑职位",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/mineCompany/detailsContext",
-		"style": {
-			"navigationBarTitleText": "",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/mineCompany/jobFilter",
-		"style": {
-			"navigationBarTitleText": "职位筛选",
-			"navigationBarBackgroundColor": "#fff"
-		}
-	}, {
-		"path": "pages/mine/login",
-		"style": {
-			"navigationBarTitleText": "登录/注册",
-			"app-plus": {
-				"titleNView": {
-					"autoBackButton": false
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#85dbd0",
+				"enablePullDownRefresh": true,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleView": false
 				}
 			}
+		},
+		{
+			"path": "pages/index/personageIndex",
+			"style": {
+				"navigationBarTitleText": "找工作",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#85dbd0",
+				"enablePullDownRefresh": true,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleView": false
+				}
+			}
+		}, {
+			"path": "pages/index/enterpriseIndex",
+			"style": {
+				"navigationBarTitleText": "人才库",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#85dbd0",
+				"enablePullDownRefresh": true,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleView": false
+				}
+			}
+		},
+		{
+			"path": "pages/index/userDetails",
+			"style": {
+				"navigationBarTitleText": "人才详细信息",
+				"enablePullDownRefresh": true,
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/index/jobDetails",
+			"style": {
+				"navigationBarTitleText": "职位详细信息",
+				"enablePullDownRefresh": true,
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/search/jobSearch",
+			"style": {
+				"navigationBarTitleText": "职位搜索",
+				"navigationBarBackgroundColor": "#f3f7fa"
+			}
+		}, {
+			"path": "pages/search/jobScreen",
+			"style": {
+				"navigationBarTitleText": "职位筛选",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/search/userSelect",
+			"style": {
+				"navigationBarTitleText": "人才筛选",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/message/message",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom"
+				// "navigationBarTextStyle": "black",
+				// "navigationBarBackgroundColor": "#f9f9f9",
+				// "app-plus": {
+				// 	"titleView": false
+				// }
+			}
+		}, {
+			"path": "pages/message/chat",
+			"style": {
+				"navigationBarTitleText": "聊天",
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/message/moreOperations",
+			"style": {
+				"navigationBarTitleText": "聊天设置",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/message/allNotifications",
+			"style": {
+				"navigationBarTitleText": "所有通知"
+			}
+		}, {
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/mine/userMsg",
+			"style": {
+				"navigationBarTitleText": "个人信息",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/mine/accountType",
+			"style": {
+				"navigationBarTitleText": "选择认证类型",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/mine/personMsg",
+			"style": {
+				"navigationBarTitleText": "个人认证",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/minePersonage/resume",
+			"style": {
+				"navigationBarTitleText": "我的在线简历",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/minePersonage/jobCollect",
+			"style": {
+				"navigationBarTitleText": "职位收藏",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/mineCompany/personCollect",
+			"style": {
+				"navigationBarTitleText": "人才收藏",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/minePersonage/skill",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#fff",
+				"navigationStyle": "custom"
+				// "app-plus": {
+				// 	"titleView": {
+				// 		"buttons": [{
+				// 			"text": "确定"
+				// 		}]
+				// 	}
+				// }
+			}
+		}, {
+			"path": "pages/minePersonage/jobExpectations",
+			"style": {
+				"navigationBarTitleText": "求职期望",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/minePersonage/addWorkHistory",
+			"style": {
+				"navigationBarTitleText": "添加工作经历",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/minePersonage/updateWorkHistory",
+			"style": {
+				"navigationBarTitleText": "编辑工作经历",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/minePersonage/jobContext",
+			"style": {
+				"navigationBarTitleText": "工作内容",
+				"navigationBarBackgroundColor": "#fff",
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/minePersonage/addProjectHistory",
+			"style": {
+				"navigationBarTitleText": "添加项目经历",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/minePersonage/updateProjectHistory",
+			"style": {
+				"navigationBarTitleText": "编辑项目经历",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/minePersonage/descriptionContext",
+			"style": {
+				"navigationBarTitleText": "项目描述",
+				"navigationBarBackgroundColor": "#fff",
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/minePersonage/achievementContext",
+			"style": {
+				"navigationBarTitleText": "项目业绩",
+				"navigationBarBackgroundColor": "#fff",
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/minePersonage/addEduHistory",
+			"style": {
+				"navigationBarTitleText": "添加教育经历",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/minePersonage/updateEduHistory",
+			"style": {
+				"navigationBarTitleText": "编辑教育经历",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/minePersonage/experienceInSchoolContext",
+			"style": {
+				"navigationBarTitleText": "在校经历",
+				"navigationBarBackgroundColor": "#fff",
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/minePersonage/addCertificate",
+			"style": {
+				"navigationBarTitleText": "添加资格证书",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/minePersonage/updateCertificate",
+			"style": {
+				"navigationBarTitleText": "编辑资格证书",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/common/city",
+			"style": {
+				"navigationBarTitleText": "选择城市",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/mine/companyMsg",
+			"style": {
+				"navigationBarTitleText": "企业认证",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/mineCompany/adminPostJob",
+			"style": {
+				"navigationBarTitleText": "职位管理",
+				"navigationBarBackgroundColor": "#fff",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleView": false
+				}
+			}
+		}, {
+			"path": "pages/mineCompany/addPostJob",
+			"style": {
+				"navigationBarTitleText": "发布职位",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/mineCompany/updatePostJob",
+			"style": {
+				"navigationBarTitleText": "编辑职位",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/mineCompany/detailsContext",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/mineCompany/jobFilter",
+			"style": {
+				"navigationBarTitleText": "职位筛选",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/mine/login",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": {
+						"autoBackButton": false
+					}
+				}
+			}
+		}, {
+			"path": "pages/chat/chat/chat",
+			"style": {
+				"enablePullDownRefresh": true
+			}
 		}
-	}, {
-		"path": "pages/chat/chat/chat",
-		"style": {
-			"enablePullDownRefresh": true
-		}
+	],
+	"subPackages": [{
+		"root": "systemAdmin",
+		"pages": [{
+			"path": "systemMsgAdmin",
+			"style": {
+				"navigationBarTitleText": "系统消息管理",
+				"enablePullDownRefresh": true,
+				// "navigationStyle": "custom",
+				"app-plus": {
+					"titleView": false
+				}
+			}
+		}, {
+			"path": "examine",
+			"style": {
+				"enablePullDownRefresh": true
+			}
+		}, {
+			"path": "managelist",
+			"style": {
+				"navigationStyle": "custom"
+				// navigationStyle:custom
+			}
+		}, {
+			"path": "listitem"
+		}]
 	}],
 	"app-plus": {
 		"popGesture": "true"
@@ -286,35 +336,31 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "",
-		"navigationBarBackgroundColor": "#85dbd0",
-		"backgroundColor": "#f9f9f9",
-		"app-plus": {
-			"background": "#efeff4"
-		}
+		"navigationBarBackgroundColor": "#5EB7F5",
+		"backgroundColor": "#5EB7F5"
 	},
 	"tabBar": {
 		"color": "#c3c3c3",
 		"selectedColor": "#85dbd0",
 		"backgroundColor": "#FFFFFF",
 		"borderStyle": "black",
-		"list": [
-			// {
-			// 	"pagePath": "pages/index/enterpriseIndex",
-			// 	"text": "人才库",
-			// 	"iconPath": "static/imgs/tabBar/index.png",
-			// 	"selectedIconPath": "static/imgs/tabBar/index01.png"
-			// },
+		"list": [{
+				"pagePath": "pages/index/enterpriseIndex",
+				"text": "人才库",
+				"iconPath": "static/imgs/tabBar/work.png",
+				"selectedIconPath": "static/imgs/tabBar/work01.png"
+			},
 			{
 				"pagePath": "pages/index/personageIndex",
 				"text": "找工作",
-				"iconPath": "static/imgs/tabBar/index.png",
-				"selectedIconPath": "static/imgs/tabBar/index01.png"
+				"iconPath": "static/imgs/tabBar/work.png",
+				"selectedIconPath": "static/imgs/tabBar/work01.png"
 			},
 			{
 				"pagePath": "pages/message/message",
 				"text": "消息",
-				"iconPath": "static/imgs/tabBar/mine.png",
-				"selectedIconPath": "static/imgs/tabBar/mine01.png"
+				"iconPath": "static/imgs/tabBar/msg.png",
+				"selectedIconPath": "static/imgs/tabBar/msg01.png"
 			},
 			{
 				"pagePath": "pages/mine/mine",
