@@ -129,19 +129,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l0 = _vm.__map(_vm.companyList, function(item, index) {
-    var $orig = _vm.__get_orig(item)
+  var l0 = !(_vm.haveData == 0)
+    ? _vm.__map(_vm.companyList, function(item, index) {
+        var $orig = _vm.__get_orig(item)
 
-    var g0 =
-      _vm.type == 1
-        ? item.companyAddress.slice(4, item.companyAddress.indexOf("市"))
-        : null
-    return {
-      $orig: $orig,
-      g0: g0
-    }
-  })
-
+        var g0 =
+          _vm.type == 1
+            ? item.companyAddress.slice(4, item.companyAddress.indexOf("市"))
+            : null
+        return {
+          $orig: $orig,
+          g0: g0
+        }
+      })
+    : null
   _vm.$mp.data = Object.assign(
     {},
     {
@@ -277,9 +278,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
-
   data: function data() {
     return {
       baseurl: this.$baseUrl,
@@ -292,15 +301,35 @@ var _default =
       searchlabel: '企业',
       cellshow: false,
       userList: [],
-      type: 1 };
-
+      type: 1,
+      haveMore: 0,
+      haveData: 1,
+      urlName: '' };
 
   },
-  mounted: function mounted() {
+  onLoad: function onLoad() {
     this.getcompanyList('companyList');
+  },
+  onPullDownRefresh: function onPullDownRefresh() {
+    uni.showLoading({
+      title: "正在刷新" });
+
+    this.page = 1;
+    this.companyList = [];
+    this.haveMore = 0;
+
+    this.getcompanyList('companyList');
+    uni.stopPullDownRefresh();
+  },
+  onReachBottom: function onReachBottom() {
+    if (this.haveMore == 0) {
+      this.page++;
+      this.getcompanyList(this.urlName);
+    }
   },
   methods: {
     getcompanyList: function getcompanyList(str) {var _this = this;
+      this.urlName = str;
       var companymsg = {
         endTime: "",
         keyword: this.keyword,
@@ -321,27 +350,40 @@ var _default =
           'token': uni.getStorageSync("token") },
 
         success: function success(res) {
+          console.log('获取注册信息');
+          console.log(res);
           _this.type = str == 'companyList' ? 1 : 2;
-          _this.companyList = res.data.data.list;
-          console.log(_this.companyList);
-          var arr = [];
-          _this.imageList = [];
-          if (str == 'companyList') {
-            _this.companyList.forEach(function (e, i) {
-              arr = e.license.split('|');
-              arr.forEach(function (item) {
-                var obj = {
-                  url: '',
-                  current: '' };
 
-                obj.url = _this.baseurl + '/' + item;
-                obj.current = i;
-                _this.imageList.push(obj);
-              });
-            });
+
+          if (res.data.data.list.length == 0) {
+            _this.haveMore = 1;
+          } else {
+            var data = _this.companyList.concat(res.data.data.list);
+            _this.companyList = data;
           }
 
-          // console.log('imgurl', this.imageList)
+          if (_this.companyList.length == 0) {
+            _this.haveData = 0;
+          } else {
+            _this.haveData = 1;
+
+            var arr = [];
+            _this.imageList = [];
+            if (str == 'companyList') {
+              _this.companyList.forEach(function (e, i) {
+                arr = e.license.split('|');
+                arr.forEach(function (item) {
+                  var obj = {
+                    url: '',
+                    current: '' };
+
+                  obj.url = _this.baseurl + '/' + item;
+                  obj.current = i;
+                  _this.imageList.push(obj);
+                });
+              });
+            }
+          };
         },
         fail: function fail(res) {
           console.log(res);
@@ -356,6 +398,10 @@ var _default =
     },
     changtype: function changtype(type) {
       this.cellshow = false;
+      this.page = 1;
+      this.companyList = [];
+      this.haveMore = 0;
+
       // console.log(tag.name,type)
       if (type.name == undefined && type == 'company') {
         this.searchlabel = '企业';
@@ -372,6 +418,7 @@ var _default =
       }
     },
     toitem: function toitem(item) {
+      console.log(item);
       if (this.searchlabel == '企业') {
         uni.navigateTo({
           url: './listitem?params=' + encodeURIComponent(JSON.stringify(item)) });
@@ -388,10 +435,18 @@ var _default =
 
     },
     search: function search() {
+      this.page = 1;
+      this.companyList = [];
+      this.haveMore = 0;
+
       var val = this.searchlabel == '企业' ? 'companyList' : 'userSearchList';
       this.getcompanyList('userSearchList');
     },
     custom: function custom() {
+      this.page = 1;
+      this.companyList = [];
+      this.haveMore = 0;
+
       var val = this.searchlabel == '企业' ? 'companyList' : 'userSearchList';
       this.getcompanyList('userSearchList');
     } } };exports.default = _default;

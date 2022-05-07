@@ -219,6 +219,9 @@ _vue.default.prototype.chat_checkinServer = function () {
     type: "checkin",
     token: getApp().globalData.chatInfo.token };
 
+
+
+
   uni.sendSocketMessage({
     data: JSON.stringify(msg),
     success: function success() {},
@@ -892,7 +895,8 @@ __webpack_require__.r(__webpack_exports__);
       "selectedIconPath": "/static/imgs/tabBar/mine01.png" }],
 
 
-    isRed: false },
+    isRed: false,
+    cid: null },
 
   data: function data() {
     return {
@@ -902,6 +906,7 @@ __webpack_require__.r(__webpack_exports__);
   onLaunch: function onLaunch() {var _this = this;
     this.token = uni.getStorageSync('token');
     console.log('token的值', this.token);
+
     if (!this.token) {
       uni.reLaunch({
         url: 'pages/mine/login',
@@ -913,6 +918,21 @@ __webpack_require__.r(__webpack_exports__);
 
     } else {
       this.getUserInfo();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -966,10 +986,68 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   },
   onShow: function onShow() {
     this.$store.dispatch('reconnect');
     console.log('App Show');
+    if (!this.token) {
+      uni.reLaunch({
+        url: 'pages/mine/login',
+        success: function success() {
+
+
+
+        } });
+
+    }
   },
   onHide: function onHide() {
     console.log('App Hide');

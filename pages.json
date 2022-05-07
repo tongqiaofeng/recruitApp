@@ -316,8 +316,14 @@
 				}
 			}
 		}, {
+			"path": "systemMsgAdd",
+			"style": {
+				"navigationBarTitleText": "系统消息添加"
+			}
+		}, {
 			"path": "examine",
 			"style": {
+				"navigationBarTitleText": "企业注册审核",
 				"enablePullDownRefresh": true
 			}
 		}, {
@@ -337,7 +343,7 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "",
 		"navigationBarBackgroundColor": "#5EB7F5",
-		"backgroundColor": "#5EB7F5"
+		"backgroundColor": "#f6f9ff"
 	},
 	"tabBar": {
 		"color": "#c3c3c3",

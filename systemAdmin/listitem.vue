@@ -1,6 +1,6 @@
 <template>
 	<view class="page" style="height: 100vh;">
-		<view class="bg-white rounded2 m-2 p-4"   v-if="companyList.license!=undefined">
+		<view class="bg-white rounded2 m-2 p-4" v-if="companyList.license!=undefined">
 			<view class="pb-3 flex justify-between border-bottom2">
 				<view>
 					<view class="font-weight-bolder font-lg">{{companyList.companyName}}</view>
@@ -34,28 +34,30 @@
 			</view>
 			<view class="flex justify-start align-top mb-2">
 				<view class="font-weight-normal font-m text-light-muted" style="width: 30%;">营业执照</view>
-				<view v-for="(imgitem,n) in imageList"  :key="n" style="width: 70%;"
-					class="flex justify-start">
-					<image  :src="imgitem.url" mode="aspectFit"
-						@click="license(imgitem.url,index)" style="width: 180rpx;height: 180rpx;margin-right: 15rpx;">
+				<view v-for="(imgitem,n) in imageList" :key="n" style="width: 70%;" class="flex justify-start">
+					<image :src="imgitem.url" mode="aspectFit" @click="license(imgitem.url,index)"
+						style="width: 180rpx;height: 180rpx;margin-right: 15rpx;">
 					</image>
 				</view>
 			</view>
 			<!-- <view>{{companyList.formalSchool!=undefined}}</view> -->
 			<view class="flex justify-end align-center  m-2" v-if="companyList.status!=0">
 				<view class="font font-m text-light-muted mr-1 ">审核人员：</view>
-				<view class="font text-light-muted">{{companyList.checkerName==null?'暂无':companyList.checkerName}}</view>
+				<view class="font text-light-muted">{{companyList.checkerName==null?'暂无':companyList.checkerName}}
+				</view>
 			</view>
 		</view>
-        <view class="bg-white rounded2 m-2 p-4"   v-else>
+		<view class="bg-white rounded2 m-2 p-4" v-else>
 			<view class="pb-3 flex justify-between align-center border-bottom2">
-					<view class="font-weight-bolder font-lg">{{companyList.fullName}}</view>
-					<view class="font-md">{{companyList.sex}}</view>
-					<view class="font-md">{{companyList.formalSchool}}</view>
+				<view class="font-weight-bolder font-lg">{{companyList.fullName}}</view>
+				<view class="font-md">{{companyList.sex}}</view>
+				<view class="font-md">{{companyList.formalSchool}}</view>
 			</view>
 			<view class="flex justify-start align-center mb-2 mt-3">
 				<view class="font-weight-normal font-m text-light-muted" style="width: 30%;">薪资范围</view>
-				<view class="font-md" style="width: 70%;">{{companyList.lowestSalary+"-"+companyList.highestSalary}}{{item.type == '实习/兼职' ? '元' : 'K'}}</view>
+				<view class="font-md" style="width: 70%;">
+					{{companyList.lowestSalary+"-"+companyList.highestSalary}}{{companyList.type == '实习/兼职' ? '元' : 'K'}}
+				</view>
 			</view>
 			<view class="flex justify-start align-center mb-2">
 				<view class="font-weight-normal font-m text-light-muted" style="width: 30%;">工作年限</view>
@@ -87,40 +89,40 @@
 				<view class="font text-light-muted">{{companyList.checkerName==null?'暂无':companyList.checkerName}}</view>
 			</view> -->
 		</view>
-	
+
 	</view>
 </template>
 
 <script>
-	export default{ 
-		data(){
-			return{
+	export default {
+		data() {
+			return {
 				baseurl: this.$baseUrl,
-				companyList:[],
-				imageList:[]
+				companyList: [],
+				imageList: []
 			}
 		},
 		onLoad(e) {
-			this.companyList=JSON.parse(decodeURIComponent(e.params))
-			if(this.companyList.license!=undefined){
+			this.companyList = JSON.parse(decodeURIComponent(e.params))
+			if (this.companyList.license != undefined) {
 				let arr = []
 				this.imageList = []
-				arr=this.companyList.license.split('|')
-					arr.forEach((item,i) => {
-						let obj = {
-							url: '',
-							current: ''
-						}
-						obj.url = this.baseurl +'/'+ item
-						obj.current = i
-						this.imageList.push(obj)
-					})
-				
+				arr = this.companyList.license.split('|')
+				arr.forEach((item, i) => {
+					let obj = {
+						url: '',
+						current: ''
+					}
+					obj.url = this.baseurl + '/' + item
+					obj.current = i
+					this.imageList.push(obj)
+				})
+
 			}
 			console.log(this.companyList)
 			// console.log(this.imageList)
 		}
-	} 
+	}
 </script>
 
 <style>

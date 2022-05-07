@@ -31,7 +31,7 @@
   background-color: #fff;
 }
 .login-container .login-title.data-v-157e2966 {
-  color: #343A54;
+  color: #343a54;
   font-size: 40rpx;
   font-weight: bold;
 }
@@ -39,34 +39,34 @@
   margin-top: 98rpx;
 }
 .login-container .login-main .phone-num.data-v-157e2966 {
-  color: #5EB9F5;
+  color: #5eb9f5;
   font-size: 26rpx;
 }
 .login-container .login-main .codeGeting.data-v-157e2966 {
-  color: #B2BDC5;
+  color: #b2bdc5;
 }
 .login-container .login-main .phone-main.data-v-157e2966 {
   padding: 30rpx;
   display: flex;
   align-items: center;
-  background-color: #F6FBFF;
+  background-color: #f6fbff;
   border-radius: 20rpx;
 }
 .login-container .login-main .phone-main .phone-left.data-v-157e2966 {
   margin-right: 40rpx;
   font-size: 30rpx;
-  color: #5EB9F5;
+  color: #5eb9f5;
 }
 .login-container .login-main .phone-main .login-line.data-v-157e2966 {
   width: 2rpx;
   height: 40rpx;
   margin-right: 30rpx;
-  background-color: #D0D3DF;
+  background-color: #d0d3df;
 }
 .login-container .login-main .phone-main .phone-input.data-v-157e2966 {
   flex: 1;
   font-size: 28rpx;
-  color: #B2BDC5;
+  color: #b2bdc5;
 }
 .login-container .login-main .code-main.data-v-157e2966 {
   justify-content: space-between;
@@ -79,7 +79,7 @@
   margin: 0 auto;
   padding: 30rpx 0;
   margin-top: 108rpx;
-  background: linear-gradient(to top, #5EB7F5, #5EDAF5);
+  background: linear-gradient(to top, #5eb7f5, #5edaf5);
   border-radius: 20rpx;
   color: #fff;
   font-size: 30rpx;

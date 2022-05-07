@@ -28,73 +28,81 @@
 			</view>
 		</view>
 		<view class="itemlist">
-			<view class="item bg-white p-3" v-for="(item,index) in companyList" :key="index" @click="toitem(item)">
-				<view class="flex align-center">
-					<image :src="baseurl+'/'+item.headPic" style="width: 140rpx;height: 140rpx;border-radius: 8px;"></image>
-					<!-- 企业 -->
-					<view class="ml-2 flex flex-column justify-center" style="height: 140rpx;" v-if="type==1">
-						<text class="font-weight-bold font-lg">{{item.companyName}}</text>
-						<view style="margin-left: 430rpx;">
-							<u-icon name="arrow-right"></u-icon>
-						</view>
-						<view class="flex align-center ">
-							<view class="flex align-center mr-3">
-								<u-icon name="map-fill"></u-icon>
-								<text
-									class="ml- font">{{item.companyAddress.slice(4,item.companyAddress.indexOf('市'))}}</text>
+			<view v-if="haveData == 0" class="no-data">
+				<image src="/static/imgs/common/no.png" mode="aspectFill"></image>
+				<text style="font-size: 30rpx">暂无相关数据~</text>
+			</view>
+			<view v-else>
+				<view class="item bg-white p-3" v-for="(item,index) in companyList" :key="index" @click="toitem(item)">
+					<view class="flex align-center">
+						<image :src="baseurl+'/'+item.headPic" style="width: 140rpx;height: 140rpx;border-radius: 8px;">
+						</image>
+						<!-- 企业 -->
+						<view class="ml-2 flex flex-column justify-center" style="height: 140rpx;" v-if="type==1">
+							<text class="font-weight-bold font-lg">{{item.companyName}}</text>
+							<view style="margin-left: 430rpx;">
+								<u-icon name="arrow-right"></u-icon>
 							</view>
 							<view class="flex align-center ">
-								<u-icon name="map-fill"></u-icon>
-								<text class="ml-1 font">{{item.teamSize}}</text>
+								<view class="flex align-center mr-3">
+									<u-icon name="map-fill"></u-icon>
+									<text
+										class="ml- font">{{item.companyAddress.slice(4,item.companyAddress.indexOf('市'))}}</text>
+								</view>
+								<view class="flex align-center ">
+									<u-icon name="map-fill"></u-icon>
+									<text class="ml-1 font">{{item.teamSize}}</text>
+								</view>
 							</view>
 						</view>
-					</view>
-					<!-- 个人 -->
-					<view v-else class="ml-2 flex flex-column justify-center" style="height: 140rpx;">
-						<text class="font-weight-bold font-lg">{{item.fullName}}</text>
-						<view style="margin-left: 430rpx;">
-							<u-icon name="arrow-right"></u-icon>
-						</view>
-						<view class="flex align-center ">
-							<view class="flex align-center mr-3">
-								<u-icon name="map-fill"></u-icon>
-								<text class="ml-1 font">{{item.type}}</text>
+						<!-- 个人 -->
+						<view v-else class="ml-2 flex flex-column justify-center" style="height: 140rpx;">
+							<text class="font-weight-bold font-lg">{{item.fullName}}</text>
+							<view style="margin-left: 430rpx;">
+								<u-icon name="arrow-right"></u-icon>
 							</view>
 							<view class="flex align-center ">
-								<u-icon name="map-fill"></u-icon>
-								<text class="ml-1 font">{{item.age}}</text>
+								<view class="flex align-center mr-3">
+									<u-icon name="map-fill"></u-icon>
+									<text class="ml-1 font">{{item.type}}</text>
+								</view>
+								<view class="flex align-center ">
+									<u-icon name="map-fill"></u-icon>
+									<text class="ml-1 font">{{item.age}}</text>
+								</view>
 							</view>
 						</view>
 					</view>
-				</view>
-				<view class="rounded2 flex justify-between align-center mt-2 p-2"
-					style="background-color: #f8f8f8;box-sizing: border-box;" v-if="type==2">
-					<view class="flex flex-column">
-						<text class="text-hover-light font-small">工作年限</text>
-						<view><text class="font font-weight-bold">{{item.workingSeniority}}</text>
-							<text class="ml-1 text-hover-light font-small">年</text>
+					<view class="rounded2 flex justify-between align-center mt-2 p-2"
+						style="background-color: #f8f8f8;box-sizing: border-box;" v-if="type==2">
+						<view class="flex flex-column">
+							<text class="text-hover-light font-small">工作年限</text>
+							<view><text class="font font-weight-bold">{{item.workingSeniority}}</text>
+								<text class="ml-1 text-hover-light font-small">年</text>
+							</view>
 						</view>
-					</view>
-					<view class="flex flex-column">
-						<text class="text-hover-light font-small">薪资</text>
-						<view><text class="font font-weight-bold">{{item.lowestSalary+"-"+item.highestSalary}}</text>
-							<text class="ml-1 text-hover-light font-small">K</text>
-						</view>
+						<view class="flex flex-column">
+							<text class="text-hover-light font-small">薪资</text>
+							<view><text
+									class="font font-weight-bold">{{item.lowestSalary+"-"+item.highestSalary}}</text>
+								<text class="ml-1 text-hover-light font-small">K</text>
+							</view>
 
-					</view>
-					<view class="flex flex-column">
-						<text class="text-hover-light font-small">城市</text>
-						<text class="font font-weight-bold">{{item.city}}</text>
+						</view>
+						<view class="flex flex-column">
+							<text class="text-hover-light font-small">城市</text>
+							<text class="font font-weight-bold">{{item.city}}</text>
+						</view>
 					</view>
 				</view>
 			</view>
+
 		</view>
 	</view>
 </template>
 
 <script>
 	export default {
-
 		data() {
 			return {
 				baseurl: this.$baseUrl,
@@ -108,14 +116,34 @@
 				cellshow: false,
 				userList: [],
 				type: 1,
-
+				haveMore: 0,
+				haveData: 1,
+				urlName: ''
 			}
 		},
-		mounted() {
+		onLoad() {
 			this.getcompanyList('companyList')
+		},
+		onPullDownRefresh() {
+			uni.showLoading({
+				title: "正在刷新",
+			});
+			this.page = 1;
+			this.companyList = [];
+			this.haveMore = 0;
+
+			this.getcompanyList('companyList');
+			uni.stopPullDownRefresh();
+		},
+		onReachBottom() {
+			if (this.haveMore == 0) {
+				this.page++;
+				this.getcompanyList(this.urlName);
+			}
 		},
 		methods: {
 			getcompanyList(str) {
+				this.urlName = str;
 				let companymsg = {
 					endTime: "",
 					keyword: this.keyword,
@@ -129,34 +157,47 @@
 					type: ""
 				}
 				uni.request({
-					url: this.baseurl +'/'+ str + '/?page=' + this.page + '&pageNum=10',
+					url: this.baseurl + '/' + str + '/?page=' + this.page + '&pageNum=10',
 					data: str == 'companyList' ? companymsg : usermsg,
 					method: 'POST',
 					header: {
 						'token': uni.getStorageSync("token")
 					},
 					success: (res) => {
+						console.log('获取注册信息');
+						console.log(res)
 						this.type = str == 'companyList' ? 1 : 2;
-						this.companyList = res.data.data.list
-						console.log(this.companyList);
-						let arr = []
-						this.imageList = []
-						if (str == 'companyList') {
-							this.companyList.forEach((e, i) => {
-								arr = e.license.split('|')
-								arr.forEach((item) => {
-									let obj = {
-										url: '',
-										current: ''
-									}
-									obj.url = this.baseurl +'/'+ item
-									obj.current = i
-									this.imageList.push(obj)
-								})
-							})
+
+
+						if (res.data.data.list.length == 0) {
+							this.haveMore = 1;
+						} else {
+							let data = this.companyList.concat(res.data.data.list);
+							this.companyList = data;
 						}
 
-						// console.log('imgurl', this.imageList)
+						if (this.companyList.length == 0) {
+							this.haveData = 0;
+						} else {
+							this.haveData = 1;
+
+							let arr = []
+							this.imageList = []
+							if (str == 'companyList') {
+								this.companyList.forEach((e, i) => {
+									arr = e.license.split('|')
+									arr.forEach((item) => {
+										let obj = {
+											url: '',
+											current: ''
+										}
+										obj.url = this.baseurl + '/' + item
+										obj.current = i
+										this.imageList.push(obj)
+									})
+								})
+							}
+						};
 					},
 					fail: (res) => {
 						console.log(res)
@@ -170,43 +211,56 @@
 				}
 			},
 			changtype(type) {
-				this.cellshow = false
+				this.cellshow = false;
+				this.page = 1;
+				this.companyList = [];
+				this.haveMore = 0;
+
 				// console.log(tag.name,type)
-				if(type.name ==undefined&&type == 'company'){
+				if (type.name == undefined && type == 'company') {
 					this.searchlabel = '企业'
 					this.getcompanyList('companyList')
-				}else if(type.name ==undefined&&type=='person'){
+				} else if (type.name == undefined && type == 'person') {
 					this.searchlabel = '个人'
 					this.getcompanyList('userSearchList')
-				}else if (type.name !=undefined&&type.name == 'company' ) {
+				} else if (type.name != undefined && type.name == 'company') {
 					this.searchlabel = '企业'
-					
-				} else if(type.name !=undefined&&type.name=='person'){
+
+				} else if (type.name != undefined && type.name == 'person') {
 					this.searchlabel = '个人'
-					
+
 				}
 			},
-			toitem(item){
-				if(this.searchlabel =='企业'){
+			toitem(item) {
+				console.log(item)
+				if (this.searchlabel == '企业') {
 					uni.navigateTo({
-					url:'./listitem?params='+encodeURIComponent(JSON.stringify(item) ),
-				})
-				}else{
+						url: './listitem?params=' + encodeURIComponent(JSON.stringify(item)),
+					})
+				} else {
 					uni.navigateTo({
-						url:'./listitem?params='+encodeURIComponent(JSON.stringify(item) ),
+						url: './listitem?params=' + encodeURIComponent(JSON.stringify(item)),
 					})
 				}
 			},
-			backto(){
+			backto() {
 				uni.navigateBack({
-					delta:1
+					delta: 1
 				})
 			},
 			search() {
+				this.page = 1;
+				this.companyList = [];
+				this.haveMore = 0;
+
 				let val = this.searchlabel == '企业' ? 'companyList' : 'userSearchList'
 				this.getcompanyList('userSearchList')
 			},
-			custom(){
+			custom() {
+				this.page = 1;
+				this.companyList = [];
+				this.haveMore = 0;
+
 				let val = this.searchlabel == '企业' ? 'companyList' : 'userSearchList'
 				this.getcompanyList('userSearchList')
 			}
@@ -228,6 +282,7 @@
 			background-color: #ffffff;
 			padding-left: 16rpx;
 			box-sizing: border-box;
+
 			.pagesearchitem {
 				padding-top: 10rpx;
 				width: 90%;

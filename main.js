@@ -13,7 +13,7 @@ Vue.prototype.$chatServerUrl = 'ws://192.168.0.164:8089/chat'
 
 Vue.config.ignoredElements.push('wx-open-launch-weapp')
 
-Vue.prototype.checkBack = function (ret, bShwoTip = 1) {
+Vue.prototype.checkBack = function(ret, bShwoTip = 1) {
 	console.log('状态码判断')
 	console.log(ret)
 	if (ret.data.code == 200) {
@@ -48,7 +48,7 @@ Vue.prototype.$onLaunched = new Promise(resolve => {
 	Vue.prototype.$isResolve = resolve;
 })
 
-Vue.prototype.getUserInfo = function () {
+Vue.prototype.getUserInfo = function() {
 	let userInfo = {};
 	uni.request({
 		url: this.$baseUrl + "/userMsgGet",
@@ -102,7 +102,7 @@ Vue.prototype.getUserInfo = function () {
 }
 
 // k分价格
-Vue.prototype.formatNumberRgx = function (num) {
+Vue.prototype.formatNumberRgx = function(num) {
 	if (num == "" || num == null || num == 0) {
 		return 0;
 	} else {
@@ -112,7 +112,7 @@ Vue.prototype.formatNumberRgx = function (num) {
 }
 
 // 日期-替换为.
-Vue.prototype.formatTime = function (time) {
+Vue.prototype.formatTime = function(time) {
 	if (time) {
 		if (time.indexOf('-') !== -1) return time.split('-').join('.')
 		else return time
@@ -135,7 +135,7 @@ let g_socketTask = null;
 let g_socketLiveTime = 0; //socket最后收到消息时间
 
 //连接服务器
-Vue.prototype.chat_connectServer = function () {
+Vue.prototype.chat_connectServer = function() {
 
 	let token = getApp().globalData.chatInfo.token;
 
@@ -168,7 +168,7 @@ Vue.prototype.chat_connectServer = function () {
 
 	this.chat_recvFromServer();
 
-	uni.onSocketOpen(function (res) {
+	uni.onSocketOpen(function(res) {
 		console.log('WebSocket连接成功！', res);
 		g_socketLiveTime = new Date().getTime();
 		that.chat_checkinServer();
@@ -176,12 +176,12 @@ Vue.prototype.chat_connectServer = function () {
 		that.chat_updateUserListCmd();
 	});
 
-	uni.onSocketError(function (res) {
+	uni.onSocketError(function(res) {
 		console.log('WebSocket连接失败');
 		that.chat_reConnectServer();
 	});
 
-	uni.onSocketClose(function () {
+	uni.onSocketClose(function() {
 		console.log('WebSocket关闭');
 		that.chat_reConnectServer();
 	})
@@ -200,28 +200,31 @@ Vue.prototype.chat_connectServer = function () {
 }
 
 //重连
-Vue.prototype.chat_reConnectServer = function () {
+Vue.prototype.chat_reConnectServer = function() {
 	g_socketLiveTime = 0;
 }
 
 //发送心路包
-Vue.prototype.chat_checkinServer = function () {
+Vue.prototype.chat_checkinServer = function() {
 	let msg = {
 		type: "checkin",
-		token: getApp().globalData.chatInfo.token
+		token: getApp().globalData.chatInfo.token,
+		//#ifdef APP-PLUS
+		cid: getApp().globalData.cid
+		//#endif
 	}
 	uni.sendSocketMessage({
 		data: JSON.stringify(msg),
-		success: function () {},
+		success: function() {},
 
-		fail: function (res) {
+		fail: function(res) {
 			that.chat_reConnectServer();
 		}
 	});
 }
 
 //处理接收到的消息
-Vue.prototype.chat_recvFromServer = function () {
+Vue.prototype.chat_recvFromServer = function() {
 	uni.onSocketMessage((res) => {
 		g_socketLiveTime = new Date().getTime();
 		console.log('收到消息', JSON.parse(res.data));
@@ -297,7 +300,7 @@ Vue.prototype.chat_recvFromServer = function () {
 }
 
 //处理新消息
-Vue.prototype.chat_recvNewMsg = function (data) {
+Vue.prototype.chat_recvNewMsg = function(data) {
 	let page = this.chat_getCurPage();
 	if (data.sender == getApp().globalData.chatInfo.userId) {
 		//自己发的消息
@@ -407,7 +410,7 @@ Vue.prototype.chat_recvNewMsg = function (data) {
 }
 
 //根据msgInfo查找消息
-Vue.prototype.chat_findMsg = function (userIdx, msgInfo) {
+Vue.prototype.chat_findMsg = function(userIdx, msgInfo) {
 	for (let i = getApp().globalData.userList[userIdx].msgList.length - 1, j = 0; i >= 0 && j < 20; --i, ++j) {
 		if (getApp().globalData.userList[userIdx].msgList[i].readStatus == -1) {
 			if (getApp().globalData.userList[userIdx].msgList[i].msgInfo == msgInfo) {
@@ -420,7 +423,7 @@ Vue.prototype.chat_findMsg = function (userIdx, msgInfo) {
 }
 
 //根据userId从UserList中查找用户
-Vue.prototype.chat_findUser = function (userId) {
+Vue.prototype.chat_findUser = function(userId) {
 	for (let i = 0; i < getApp().globalData.userList.length; ++i) {
 		if (getApp().globalData.userList[i].userId == userId)
 			return i;
@@ -428,7 +431,7 @@ Vue.prototype.chat_findUser = function (userId) {
 	return -1;
 }
 
-Vue.prototype.admin_findmsg = function (id) {
+Vue.prototype.admin_findmsg = function(id) {
 	console.log("查找系统id", getApp().globalData.adminList)
 	for (let i = 0; i < getApp().globalData.adminList.length; ++i) {
 		if (getApp().globalData.adminList[i].id == id)
@@ -438,7 +441,7 @@ Vue.prototype.admin_findmsg = function (id) {
 }
 
 //发送消息
-Vue.prototype.chat_sendToServer = function (msg) {
+Vue.prototype.chat_sendToServer = function(msg) {
 	console.log('发送消息');
 	uni.sendSocketMessage({
 		data: JSON.stringify(msg),
@@ -452,7 +455,7 @@ Vue.prototype.chat_sendToServer = function (msg) {
 }
 
 //发送提取用户列表命令
-Vue.prototype.chat_updateUserListCmd = function () {
+Vue.prototype.chat_updateUserListCmd = function() {
 	let msg = {
 		type: "historyOverview",
 		token: getApp().globalData.chatInfo.token,
@@ -462,7 +465,7 @@ Vue.prototype.chat_updateUserListCmd = function () {
 	this.chat_sendToServer(msg);
 }
 
-Vue.prototype.chat_updateAdminListCmd = function () {
+Vue.prototype.chat_updateAdminListCmd = function() {
 	let msg = {
 		type: "historyAdmin",
 		token: getApp().globalData.chatInfo.token,
@@ -472,7 +475,7 @@ Vue.prototype.chat_updateAdminListCmd = function () {
 	this.chat_sendToServer(msg);
 }
 
-Vue.prototype.chat_deleteAdminList = function (data) {
+Vue.prototype.chat_deleteAdminList = function(data) {
 	let msg = {
 		type: "deleteAdmin",
 		token: getApp().globalData.chatInfo.token,
@@ -484,7 +487,7 @@ Vue.prototype.chat_deleteAdminList = function (data) {
 	this.chat_sendToServer(msg);
 }
 
-Vue.prototype.chat_sendAdminList = function (type, content) {
+Vue.prototype.chat_sendAdminList = function(type, content) {
 	let msg = {
 		type: "messageAdmin",
 		token: getApp().globalData.chatInfo.token,
@@ -496,7 +499,7 @@ Vue.prototype.chat_sendAdminList = function (type, content) {
 	this.chat_sendToServer(msg);
 }
 
-Vue.prototype.chat_updateUserMsg = function (userId) {
+Vue.prototype.chat_updateUserMsg = function(userId) {
 	let userIdx = this.chat_findUser(userId);
 	if (userIdx > -1) {
 		if (getApp().globalData.userList[userIdx].msgList.length == 0 || !getApp().globalData.userList[userIdx]
@@ -511,7 +514,7 @@ Vue.prototype.chat_updateUserMsg = function (userId) {
 }
 
 //发送提取聊天记录命令:loadMore
-Vue.prototype.chat_getMsgHistoryCmd = function (userId, loadMore = true) {
+Vue.prototype.chat_getMsgHistoryCmd = function(userId, loadMore = true) {
 	let msgStartId = 0;
 	let userIdx = this.chat_findUser(userId);
 	if (userIdx > -1) {
@@ -536,7 +539,7 @@ Vue.prototype.chat_getMsgHistoryCmd = function (userId, loadMore = true) {
 }
 
 //给指定用户发送消息
-Vue.prototype.chat_sendMsgToUserCmd = function (userId, content, type) {
+Vue.prototype.chat_sendMsgToUserCmd = function(userId, content, type) {
 	let msg = {
 		type: "message",
 		token: getApp().globalData.chatInfo.token,
@@ -584,7 +587,7 @@ Vue.prototype.chat_sendMsgToUserCmd = function (userId, content, type) {
 }
 
 //更新消息状态
-Vue.prototype.chat_updateMsgState = function (data) {
+Vue.prototype.chat_updateMsgState = function(data) {
 	if (data.type == 'message') {
 		let userIdx = this.chat_findUser(data.receiver);
 		if (userIdx > -1) {
@@ -634,7 +637,7 @@ Vue.prototype.chat_updateMsgState = function (data) {
 }
 
 //发送消息已读命令
-Vue.prototype.chat_readMsgCmd = function (userId) {
+Vue.prototype.chat_readMsgCmd = function(userId) {
 	let msg = {
 		type: "read",
 		token: getApp().globalData.chatInfo.token,
@@ -645,7 +648,7 @@ Vue.prototype.chat_readMsgCmd = function (userId) {
 }
 
 //已阅读消息
-Vue.prototype.chat_readMsgSuccess = function (data) {
+Vue.prototype.chat_readMsgSuccess = function(data) {
 	let userIdx = this.chat_findUser(data.userId);
 	if (userIdx > -1) {
 		getApp().globalData.userList[userIdx].num = 0;
@@ -653,7 +656,7 @@ Vue.prototype.chat_readMsgSuccess = function (data) {
 }
 
 //删除消息命令
-Vue.prototype.chat_deleteMsgCmd = function (userId, msgId) {
+Vue.prototype.chat_deleteMsgCmd = function(userId, msgId) {
 	let msg = {
 		type: "delete",
 		token: getApp().globalData.chatInfo.token,
@@ -665,7 +668,7 @@ Vue.prototype.chat_deleteMsgCmd = function (userId, msgId) {
 }
 
 //获取用户信息
-Vue.prototype.chat_getUserInfoCmd = function (userId) {
+Vue.prototype.chat_getUserInfoCmd = function(userId) {
 	let msg = {
 		type: "user",
 		token: getApp().globalData.chatInfo.token,
@@ -676,7 +679,7 @@ Vue.prototype.chat_getUserInfoCmd = function (userId) {
 }
 
 //更新用户头像
-Vue.prototype.chat_updateUserPic = function (data) {
+Vue.prototype.chat_updateUserPic = function(data) {
 	let userIdx = this.chat_findUser(data.id);
 	if (userIdx > -1) {
 		//更新该用户
@@ -686,7 +689,7 @@ Vue.prototype.chat_updateUserPic = function (data) {
 }
 
 //获取当前页面
-Vue.prototype.chat_getCurPage = function () {
+Vue.prototype.chat_getCurPage = function() {
 	let pages = getCurrentPages(); // 获取栈实例
 	console.log(pages);
 	if (pages.length > 0) {
@@ -702,7 +705,7 @@ Vue.prototype.chat_getCurPage = function () {
 }
 
 //刷新页面
-Vue.prototype.chat_updatePage = function (page) {
+Vue.prototype.chat_updatePage = function(page) {
 	let curPage = this.chat_getCurPage();
 	if (curPage == page) {
 		if (page == 'list') {
@@ -713,7 +716,7 @@ Vue.prototype.chat_updatePage = function (page) {
 	}
 }
 
-Vue.prototype.chat_getMsgUUID = function () {
+Vue.prototype.chat_getMsgUUID = function() {
 	let s = [];
 	let hexDigits = "0123456789abcdefABCDEF";
 	for (let i = 0; i < 36; i++) {
@@ -724,7 +727,7 @@ Vue.prototype.chat_getMsgUUID = function () {
 }
 
 // 未读消息红点
-Vue.prototype.chat_updateReddot = function () {
+Vue.prototype.chat_updateReddot = function() {
 	let bRed = false;
 	for (let i = 0; i < getApp().globalData.userList.length; ++i) {
 		if (getApp().globalData.userList[i].num > 0) {
@@ -746,7 +749,7 @@ Vue.prototype.chat_updateReddot = function () {
 }
 
 // 置顶消息
-Vue.prototype.topMsg = function (data) {
+Vue.prototype.topMsg = function(data) {
 	console.log('置顶/取消置顶消息');
 	console.log(data)
 	let list = getApp().globalData.userList;
@@ -769,7 +772,7 @@ Vue.prototype.topMsg = function (data) {
 }
 
 // 删除与该人员的聊天列表
-Vue.prototype.delMsg = function (data) {
+Vue.prototype.delMsg = function(data) {
 	console.log('删除消息');
 	console.log(data)
 	let list = getApp().globalData.userList;

@@ -278,6 +278,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   components: {
     tabBar: tabBar },
@@ -294,6 +307,7 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   onShow: function onShow() {
+    this.getUserInfo();
     this.chat_updateReddot();
   },
   onLoad: function onLoad() {
@@ -328,25 +342,19 @@ __webpack_require__.r(__webpack_exports__);
     },
     // 退出登录
     logoutClick: function logoutClick() {
-      var userInfo = {};
-      userInfo.userId = null;
-      userInfo.userRole = '';
-      userInfo.userToken = '';
-      userInfo.userFullName = '';
-      userInfo.userSex = '';
-      userInfo.userAge = '';
-      userInfo.userHeadPic = '';
-      userInfo.phoneNumber = '';
-
-      getApp().globalData.userInfo = userInfo;
-      uni.setStorageSync('userId', userInfo.userId);
-      uni.setStorageSync("role", userInfo.userRole);
-      uni.setStorageSync("token", userInfo.userToken);
-      uni.setStorageSync("fullName", userInfo.userFullName);
-      uni.setStorageSync("sex", userInfo.userSex);
-      uni.setStorageSync("age", userInfo.userAge);
-      uni.setStorageSync("headPic", userInfo.userHeadPic);
-      uni.setStorageSync("phoneNumber", userInfo.phoneNumber);
+      getApp().globalData.userInfo = {};
+      uni.setStorageSync('userId', null);
+      uni.setStorageSync("role", null);
+      uni.setStorageSync("token", '');
+      uni.setStorageSync("fullName", '');
+      uni.setStorageSync("sex", '');
+      uni.setStorageSync("age", '');
+      uni.setStorageSync("city", '');
+      uni.setStorageSync("idNumber", '');
+      uni.setStorageSync("joinWorkTime", '');
+      uni.setStorageSync("headPic", '');
+      uni.setStorageSync("phoneNumber", '');
+      uni.setStorageSync('favoriteNum', '');
 
       // uni.navigateTo({
       // 	url: "./login",

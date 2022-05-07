@@ -257,66 +257,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default =
 {
   data: function data() {
@@ -330,17 +270,35 @@ var _default =
       curNow: 0,
       autoheight: false,
       imageList: [],
-      page: 1 };
+      page: 1,
+      haveMore: 0,
+      haveData: 1 };
 
   },
   mounted: function mounted() {
     this.getcompanyList(0);
     // this.passorout(1, '', 1)
   },
+  onPullDownRefresh: function onPullDownRefresh() {
+    uni.showLoading({
+      title: "正在刷新" });
+
+    this.page = 1;
+    this.companyList = [];
+    this.haveMore = 0;
+
+    this.getcompanyList(0);
+    uni.stopPullDownRefresh();
+  },
+  onReachBottom: function onReachBottom() {
+    if (this.haveMore == 0) {
+      this.page++;
+      this.getcompanyList(this.curNow >= 2 ? -1 : this.curNow);
+    }
+  },
   methods: {
+    // 获取注册的企业列表
     getcompanyList: function getcompanyList(val) {var _this = this;
-      // console.log(this.baseurl)
-      // console.log(this.baseurl2)
       uni.request({
         url: this.baseurl + "/companyList/?page=" + this.page + "&pageNum=10",
         data: {
@@ -351,27 +309,39 @@ var _default =
 
         method: "POST",
         header: {
-          token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoyLCJjcmVhdGVUaW1lIjoxNjM3ODk4NDE5LCJpZCI6ImE0N2NiZDdhZWNhNGFlYzU0OGIxMTk4NTI0Nzc2ODlhIiwidXNlcm5hbWUiOiIxNzc4MTc2OTczMSJ9.ktIa1o-XSt_7nZbv0pOL4tAH_YWO6_fE2Z4smzIxVP8" //自定义请求头信息
-        },
-        success: function success(res) {
-          _this.companyList = res.data.data.list;
-          console.log(res);
-          var arr = [];
-          _this.imageList = [];
-          _this.companyList.forEach(function (e, i) {
-            arr = e.license.split("|");
-            arr.forEach(function (item) {
-              var obj = {
-                url: "",
-                current: "" };
+          "content-type": "application/json",
+          "token": uni.getStorageSync('token') },
 
-              obj.url = _this.baseurl + "/" + item;
-              obj.current = i;
-              _this.imageList.push(obj);
+        success: function success(res) {
+          console.log('注册的企业列表');
+          console.log(res);
+
+          if (res.data.data.list.length == 0) {
+            _this.haveMore = 1;
+          } else {
+            var data = _this.companyList.concat(res.data.data.list);
+            _this.companyList = data;
+          }
+
+          if (_this.companyList.length == 0) {
+            _this.haveData = 0;
+          } else {
+            _this.haveData = 1;
+            var arr = [];
+            _this.imageList = [];
+            _this.companyList.forEach(function (e, i) {
+              arr = e.license.split("|");
+              arr.forEach(function (item) {
+                var obj = {
+                  url: "",
+                  current: "" };
+
+                obj.url = _this.baseurl + "/" + item;
+                obj.current = i;
+                _this.imageList.push(obj);
+              });
             });
-          });
-          // console.log('imgurl', this.imageList)
+          };
         },
         fail: function fail(res) {
           console.log(res);
@@ -379,13 +349,13 @@ var _default =
 
     },
     sectionChange: function sectionChange(index) {
+      this.page = 1;
+      this.companyList = [];
+      this.haveMore = 0;
       this.curNow = index;
       // console.log(index)
       this.getcompanyList(index >= 2 ? -1 : index);
     },
-    // popup() {
-    // 	this.show = true
-    // },
     open: function open() {
       // console.log('open');
     },
@@ -418,9 +388,9 @@ var _default =
 
         method: "POST",
         header: {
-          token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoyLCJjcmVhdGVUaW1lIjoxNjM3ODk4NDE5LCJpZCI6ImE0N2NiZDdhZWNhNGFlYzU0OGIxMTk4NTI0Nzc2ODlhIiwidXNlcm5hbWUiOiIxNzc4MTc2OTczMSJ9.ktIa1o-XSt_7nZbv0pOL4tAH_YWO6_fE2Z4smzIxVP8" //自定义请求头信息
-        },
+          "content-type": "application/json",
+          "token": uni.getStorageSync('token') },
+
         success: function success(res) {
           _this2.show = false;
           console.log(res.data);

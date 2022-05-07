@@ -2,7 +2,7 @@
 	<view class="mine-container">
 		<!-- 我的 -->
 		<view class="mine-header">
-			<navigator :url="role != 2 ? './userMsg' : ''" hover-class="none">
+			<navigator v-if="role != 2" url="./userMsg" hover-class="none">
 				<view class="mine-top">
 					<view class="top-left">
 						<view class="left-name">
@@ -17,6 +17,19 @@
 					<image class="top-right" v-else :src="imgUrl + '/' + headPic" mode="aspectFill"></image>
 				</view>
 			</navigator>
+			<view v-if="role == 2" class="mine-top">
+				<view class="top-left">
+					<view class="left-name">
+						{{name == '' || name == null ? '欢迎使用~' : name}}
+					</view>
+					<view class="left-font">
+						你想成为怎样的人，你就会离这个目标不会太远
+					</view>
+				</view>
+				<image class="top-right" v-if="headPic == '' || headPic == null" src="../../static/imgs/mine/avatar.png"
+					mode="aspectFill"></image>
+				<image class="top-right" v-else :src="imgUrl + '/' + headPic" mode="aspectFill"></image>
+			</view>
 			<view class="header-main" v-if="role != 2">
 				<view class="header-main-every" @click="goMessage">
 					<view class="num">
@@ -197,25 +210,19 @@
 			},
 			// 退出登录
 			logoutClick() {
-				let userInfo = {};
-				userInfo.userId = null;
-				userInfo.userRole = '';
-				userInfo.userToken = '';
-				userInfo.userFullName = '';
-				userInfo.userSex = '';
-				userInfo.userAge = '';
-				userInfo.userHeadPic = '';
-				userInfo.phoneNumber = '';
-
-				getApp().globalData.userInfo = userInfo;
-				uni.setStorageSync('userId', userInfo.userId);
-				uni.setStorageSync("role", userInfo.userRole);
-				uni.setStorageSync("token", userInfo.userToken);
-				uni.setStorageSync("fullName", userInfo.userFullName);
-				uni.setStorageSync("sex", userInfo.userSex);
-				uni.setStorageSync("age", userInfo.userAge);
-				uni.setStorageSync("headPic", userInfo.userHeadPic);
-				uni.setStorageSync("phoneNumber", userInfo.phoneNumber);
+				getApp().globalData.userInfo = {};
+				uni.setStorageSync('userId', null);
+				uni.setStorageSync("role", null);
+				uni.setStorageSync("token", '');
+				uni.setStorageSync("fullName", '');
+				uni.setStorageSync("sex", '');
+				uni.setStorageSync("age", '');
+				uni.setStorageSync("city", '');
+				uni.setStorageSync("idNumber", '');
+				uni.setStorageSync("joinWorkTime", '');
+				uni.setStorageSync("headPic", '');
+				uni.setStorageSync("phoneNumber", '');
+				uni.setStorageSync('favoriteNum', '')
 
 				// uni.navigateTo({
 				// 	url: "./login",

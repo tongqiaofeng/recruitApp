@@ -193,8 +193,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 var _default =
 {
   data: function data() {
@@ -219,12 +217,11 @@ var _default =
 
 
 
-      time: '获取验证码',
+      time: "获取验证码",
       count: 59,
       isGeting: false,
       disable: false,
       countDown: null };
-
 
   },
   mounted: function mounted() {
@@ -237,19 +234,19 @@ var _default =
   methods: {
     // 获取验证码
     getCode: function getCode() {var _this = this;
-      console.log('7777777777');
-      if (this.userData.phoneNumber == '') {
+      console.log("7777777777");
+      if (this.userData.phoneNumber == "") {
         uni.showToast({
-          title: '请输入手机号',
-          icon: 'none' });
+          title: "请输入手机号",
+          icon: "none" });
 
       } else {
         uni.showLoading({
           title: "验证码获取中..." });
 
         uni.request({
-          method: 'GET',
-          url: this.$baseUrl + '/smsCodeGet',
+          method: "GET",
+          url: this.$baseUrl + "/smsCodeGet",
           header: {
             "content-type": "application/json" },
 
@@ -284,7 +281,7 @@ var _default =
     },
     // 手机登录
     userLoginPhone: function userLoginPhone() {var _this2 = this;
-      console.log('55555555');
+      console.log("55555555");
       this.$refs.loginFormPhone.
       validate().
       then(function (res) {
@@ -305,13 +302,12 @@ var _default =
           complete: function complete(ret) {
             console.log("登录啦", ret);
 
-            uni.hideLoading();
             if (_this2.checkBack(ret, true) == false) {
               _this2.$isResolve();
               return;
             }
 
-            console.log('212344');
+            console.log("212344");
 
             if (ret.data.code === 200) {
               uni.setStorageSync("token", ret.data.data.token);
@@ -320,17 +316,20 @@ var _default =
 
               if (ret.data.data.role == 1) {
                 getApp().globalData.tabBarList.splice(0, 1, {
-                  "pagePath": "/pages/index/enterpriseIndex",
-                  "text": "人才库",
-                  "iconPath": "/static/imgs/tabBar/work.png",
-                  "selectedIconPath": "/static/imgs/tabBar/work01.png" });
+                  pagePath: "/pages/index/enterpriseIndex",
+                  text: "人才库",
+                  iconPath: "/static/imgs/tabBar/work.png",
+                  selectedIconPath: "/static/imgs/tabBar/work01.png" });
 
-                console.log('登录页角色', ret.data.data.role);
-                console.log(getApp().globalData.userInfo.tabBarList);
+                console.log("登录页角色", ret.data.data.role);
               }
-              uni.navigateTo({
-                url: '../index/index' });
+              setTimeout(function () {
+                uni.hideLoading();
+                console.log('看看是什么角色', uni.getStorageSync('role'));
+                uni.navigateTo({
+                  url: "../index/index" });
 
+              }, 500);
               // if (getApp().globalData.userInfo.userRole == 0) {
               // 	uni.switchTab({
               // 		url: "../index/personageIndex",

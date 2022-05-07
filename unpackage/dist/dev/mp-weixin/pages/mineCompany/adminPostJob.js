@@ -166,31 +166,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {
   components: {
     slideList: slideList },
@@ -255,6 +230,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    goBack: function goBack() {
+      uni.navigateBack({
+        delta: 1 });
+
+    },
     rowClick: function rowClick(item) {
       console.log('点击某一行');
       console.log(item);
