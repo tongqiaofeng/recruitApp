@@ -1,6 +1,17 @@
 <template>
 	<view class="page" style="height: 100vh">
-		<u-subsection :list="navlist" :current="curNow" @change="sectionChange"></u-subsection>
+		<view style="background-color: #fff;margin-top: 32rpx;padding-bottom: 48rpx;">
+			<u-tabs :list="navlist" :current="curNow" lineWidth="20" lineColor="#3469FD" :activeStyle="{
+		            color: '#081230',
+		            fontWeight: 'bold',
+		            transform: 'scale(1.05)'
+		        }" :inactiveStyle="{
+		            color: '#7A7C82',
+		            transform: 'scale(1)'
+		        }" itemStyle="padding-left: 15px; padding-right: 15px; height: 54px;font-size: 30rpx;" @change="sectionChange">
+			</u-tabs>
+		</view>
+
 		<view v-if="haveData == 0" class="no-data">
 			<image src="/static/imgs/common/no.png" mode="aspectFill"></image>
 			<text style="font-size: 30rpx">暂无相关数据~</text>
@@ -108,7 +119,13 @@
 				baseurl: this.$baseUrl,
 				show: false,
 				reason: "",
-				navlist: ["未审核", "已审核", "已拒绝"],
+				navlist: [{
+					name: "未审核"
+				}, {
+					name: "已审核"
+				}, {
+					name: "已拒绝"
+				}],
 				curNow: 0,
 				autoheight: false,
 				imageList: [],
@@ -190,13 +207,14 @@
 					},
 				});
 			},
-			sectionChange(index) {
+			sectionChange(item) {
+				console.log(item)
 				this.page = 1;
 				this.companyList = [];
 				this.haveMore = 0;
-				this.curNow = index;
+				this.curNow = item.index;
 				// console.log(index)
-				this.getcompanyList(index >= 2 ? -1 : index);
+				this.getcompanyList(item.index >= 2 ? -1 : item.index);
 			},
 			open() {
 				// console.log('open');

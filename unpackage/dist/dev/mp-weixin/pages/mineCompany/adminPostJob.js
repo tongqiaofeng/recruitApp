@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var slideList = function slideList() {__webpack_require__.e(/*! require.ensure | components/left-slide/left-slide-list */ "components/left-slide/left-slide-list").then((function () {return resolve(__webpack_require__(/*! @/components/left-slide/left-slide-list.vue */ 577));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var slideList = function slideList() {__webpack_require__.e(/*! require.ensure | components/left-slide/left-slide-list */ "components/left-slide/left-slide-list").then((function () {return resolve(__webpack_require__(/*! @/components/left-slide/left-slide-list.vue */ 587));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 

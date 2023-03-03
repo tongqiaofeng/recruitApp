@@ -324,7 +324,8 @@
 			"path": "examine",
 			"style": {
 				"navigationBarTitleText": "企业注册审核",
-				"enablePullDownRefresh": true
+				"enablePullDownRefresh": true,
+				"navigationBarBackgroundColor": "#fff"
 			}
 		}, {
 			"path": "managelist",

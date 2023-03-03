@@ -1,8 +1,9 @@
 {
   "navigationBarTitleText": "企业注册审核",
   "enablePullDownRefresh": true,
+  "navigationBarBackgroundColor": "#fff",
   "usingComponents": {
-    "u-subsection": "/uni_modules/uview-ui/components/u-subsection/u-subsection",
+    "u-tabs": "/uni_modules/uview-ui/components/u-tabs/u-tabs",
     "u-popup": "/uni_modules/uview-ui/components/u-popup/u-popup"
   }
 }
